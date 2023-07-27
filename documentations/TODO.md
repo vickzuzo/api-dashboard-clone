@@ -1,7 +1,6 @@
 
 ## Todo List
 
-
 -   [Pages]($emojis)🔁
     -   [Login](#emojis)⭕️
     -   [Register](#emojis)⭕️
