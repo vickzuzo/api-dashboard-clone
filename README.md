@@ -26,7 +26,7 @@ This is a Dashboard Frontend Application built with Next JS
 
 ### Installation
 
--   git clone [Battle Star 21](https://github.com/officialyenum/battlestar21.git)
+-   git clone [https://github.com/officialyenum/dashboard-api-application.git](https://github.com/officialyenum/dashboard-api-application.git)
 -   Run `npm install` to install packages.
 -   Run `npm run dev` to run the application in development mode.
 ### Usage
