@@ -30,6 +30,8 @@
 
 ### Components
 
+-   [SideBar]($emojis)🔁
+-   [Header]($emojis)🔁
 -   [Charts]($emojis)⭕️
     -   [Accumulation](#emojis)⭕️
 -   [Cards]($emojis)⭕️

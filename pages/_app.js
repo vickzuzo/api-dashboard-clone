@@ -5,8 +5,9 @@ import '@/styles/globals.css'
 export default function App({ Component, pageProps }) {
   return (
     <>
+      <Header currentUser={""} />
       <Sidebar>
-        <Component {...pageProps} />
+        <Component {...pageProps}/>
       </Sidebar>
     </>
   )
