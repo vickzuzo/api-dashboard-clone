@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 const imageLoader = ({ src, width, quality }) => {
     return `https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/${src}?w=${width}&q=${quality || 75}`
-  }
+}
 const Login = () => {
     return (
         <section class="h-screen">
