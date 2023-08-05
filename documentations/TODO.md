@@ -3,8 +3,8 @@
 
 ### Pages
 
--   [Login](#emojis)⭕️
--   [Register](#emojis)⭕️
+-   [Login](#emojis)🔁 
+-   [Register](#emojis)🔁 
 -   [Landing Page](#emojis)⭕️
 -   [Admin]($emojis)🔁
     -   [Management](#emojis)⭕️
@@ -52,8 +52,13 @@
     -   [Success Application Created Modal](#emojis)⭕️
     -   [Add New User Form in Modal](#emojis)⭕️
     -   [Edit User Form in Modal](#emojis)⭕️
+    -   [OTP Modal](#emojis)✅
+    -   [OTP Verified Modal](#emojis)✅
+    -   [Password Created Modal](#emojis)✅
 -   [Forms]($emojis)⭕️
-    -   [Login Form](#emojis)⭕️
+    -   [Login Form](#emojis)✅ /auth/login
+    -   [Enter Password Form](#emojis)⭕️
+    -   [Create Password Form](#emojis)✅ /auth/create-password
     -   [User Sign Up Form](#emojis)⭕️
     -   [Business Sign Up Form](#emojis)⭕️
     -   [Business Identity Form](#emojis)⭕️
