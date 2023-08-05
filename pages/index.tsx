@@ -1,9 +1,7 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import Header from '@/components/Header'
-import Sidebar from '@/components/Sidebar'
+import React from 'react'
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <Head>
@@ -13,8 +11,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        Dashboard Page
+        Landing Page
       </div>
     </>
   )
 }
+
+export default Home
