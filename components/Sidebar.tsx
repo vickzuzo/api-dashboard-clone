@@ -10,7 +10,7 @@ import { FaFileInvoiceDollar, FaMoneyBillWave } from 'react-icons/fa'
 const Sidebar = ({children}) => {
   return (
 
-    <div class="flex flex-row h-[calc(100vh-5rem)]">
+    <div className="flex flex-row h-[calc(100vh-5rem)]">
         <aside className='w-1/5 overflow-y-auto'>
                 <Link href='/' className='flex flex-row w-full my-2 items-start pl-2 hover:bg-white hover:w-full hover:my-2 hover:border-l-blue-700 hover:border-l-2'>
                     <div className='bg-gray-200 hover:bg-blue-200 cursor-pointer my-2 p-1 rounded-lg inline-block'>
