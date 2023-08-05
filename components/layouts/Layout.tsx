@@ -1,7 +1,8 @@
-import Header from '../Header'
-import Sidebar from '../Sidebar'
-import React from 'react'
- 
+import Header from "../Header";
+import Sidebar from "../Sidebar";
+import React from "react";
+import { AppLoader } from "../loaders/AppLoading";
+
 export default function Layout({ children }) {
   return (
     <>
@@ -10,5 +11,14 @@ export default function Layout({ children }) {
         <main>{children}</main>
       </Sidebar>
     </>
-  )
+  );
+}
+
+export const AppLayout = ({ children }) => {
+  return (
+    <main className="relative">
+      {children}
+      <AppLoader />
+    </main>
+  );
 };
