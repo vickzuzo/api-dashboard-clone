@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Modal } from "../../../components/modal";
+import { Modal } from "./Modal";
 import {
   Button,
   DangerPaleButton,
   PaleButton,
-} from "../../../components/forms";
+} from "../forms";
 import OtpInput from "react-otp-input";
-import { HeaderText } from "../../../components/texts";
+import { HeaderText } from "../texts";
 import { useRouter } from "next/router";
 
 interface IProps {

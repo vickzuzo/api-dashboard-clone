@@ -10,7 +10,7 @@ import {
   Text,
 } from "../../components/texts";
 import useDisclosure from "../../utils/useDisclosure";
-import { PasswordCreatedModal } from "./components/PasswordCreatedModal";
+import { PasswordCreatedModal } from "../../components/modals";
 import { useAppDispatch } from "../../utils/redux";
 import { onCloseAppLoader, onOpenAppLoader } from "../../store";
 

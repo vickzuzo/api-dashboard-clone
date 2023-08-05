@@ -1,14 +1,14 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import OtpInput from "react-otp-input";
 import {
   Button,
   DangerPaleButton,
   PaleButton,
-} from "../../../components/forms";
-import { Modal } from "../../../components/modal";
-import { HeaderText } from "../../../components/texts";
-import { onCloseAppLoader, onOpenAppLoader } from "../../../store";
-import { useAppDispatch } from "../../../utils/redux";
+} from "../forms";
+import { HeaderText } from "../texts";
+import { onCloseAppLoader, onOpenAppLoader } from "../../store";
+import { useAppDispatch } from "../../utils/redux";
+import { Modal } from "./Modal";
 
 interface IProps {
   isOpen: boolean;

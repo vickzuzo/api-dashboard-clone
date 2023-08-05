@@ -10,8 +10,7 @@ import {
   Text,
 } from "../../components/texts";
 import useDisclosure from "../../utils/useDisclosure";
-import { OTPModal } from "./components/OTPModal";
-import { OTPVerifiedModal } from "./components/OTPVerifiedModal";
+import { OTPModal, OTPVerifiedModal } from "../../components/modals";
 import { useRouter } from "next/router";
 import { useAppDispatch } from "../../utils/redux";
 import { onCloseAppLoader, onOpenAppLoader } from "../../store";
