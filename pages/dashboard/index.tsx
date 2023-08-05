@@ -1,4 +1,5 @@
-import Layout from '@/components/layouts/Layout'
+import Layout from '../../components/layouts/Layout'
+import { HeaderText } from '../../components/texts';
 import Head from 'next/head'
 
 const Dashboard = () => {

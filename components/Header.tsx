@@ -11,7 +11,7 @@ const Header = ({ currentUser}) => {
         e.preventDefault();
     }
     return (
-      <header class="h-20 shrink-0">
+      <header className="h-20 shrink-0">
         <div className="fixed w-full flex justify-between px-2 py-2   border-b-2 border-gray-700">
           <div className='flex justify-center items-center cursor-pointer'>
             <Link href={'/'} className="font-medium p-2 text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900">
@@ -29,7 +29,7 @@ const Header = ({ currentUser}) => {
           <div className='flex justify-center space-x-2  items-center'>
             Search component goes here
           </div>
-          <nav class="flex justify-center items-center">
+          <nav className="flex justify-center items-center">
             <Link href={'/'} className="font-medium text-slate-700 rounded-lg hover:text-slate-900">
               <div className='bg-gray-200 hover:bg-blue-200 cursor-pointer m-2 p-1 rounded-2xl inline-block'>
                   <RxPerson size={20} />
