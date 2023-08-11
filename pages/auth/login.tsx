@@ -14,6 +14,7 @@ import { OTPModal, OTPVerifiedModal } from "../../components/modals";
 import { useRouter } from "next/router";
 import { useAppDispatch } from "../../utils/redux";
 import { onCloseAppLoader, onOpenAppLoader } from "../../store";
+import { LoginForm } from "../../components/forms";
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -46,32 +47,9 @@ const Login = () => {
             </div>
           </div>
           <div className="flex-auto w-[40%] m-4 bg-auth_background bg-no-repeat bg-[bottom_right_5rem] bg-contain h-full flex flex-col justify-center items-center">
-            <div className="w-full rounded-lg p-5 bg-[rgba(255,255,255,0.25)]">
-              <div className="w-full rounded-lg p-5 bg-white">
-                <SubHeaderText text="Login to your account" />
-                <Formik
-                  initialValues={
-                    email
-                      ? { email: email ? email : "", password: "" }
-                      : { email: "" }
-                  }
-                  validationSchema={Yup.object().shape(
-                    email
-                      ? {
-                          email: Yup.string()
-                            .email("Email is invalid")
-                            .required("This field is required!."),
-                          password: Yup.string().required(
-                            "This field is required!."
-                          ),
-                        }
-                      : {
-                          email: Yup.string()
-                            .email("Email is invalid")
-                            .required("This field is required!."),
-                        }
-                  )}
-                  onSubmit={(values) => {
+            <LoginForm 
+              email={email} 
+              onSubmit={(values) => {
                     if (email) {
                       router.push("/dashboard");
                     } else {
@@ -81,36 +59,7 @@ const Login = () => {
                         otpHandler.onOpen();
                       }, 3000);
                     }
-                  }}
-                >
-                  {(props) => (
-                    <Form>
-                      <FormInput
-                        LeftIcon={<VDirect />}
-                        type="email"
-                        name="email"
-                        placeholder="Enter Email Address"
-                      />
-                      {email ? (
-                        <FormInput
-                          LeftIcon={<VDirect />}
-                          RightIcon={<VEyeCloseIcon />}
-                          type="password"
-                          name="password"
-                          placeholder="Enter Password"
-                        />
-                      ) : null}
-                      <Button
-                        disabled={!props.dirty || !props.isValid}
-                        type="submit"
-                      >
-                        {email ? "LOGIN" : "VERIFY EMAIL ADDRESS"}
-                      </Button>
-                    </Form>
-                  )}
-                </Formik>
-              </div>
-            </div>
+              }} />
           </div>
         </div>
       </div>
