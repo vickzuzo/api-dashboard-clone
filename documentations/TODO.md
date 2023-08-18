@@ -56,9 +56,8 @@
     -   [OTP Verified Modal](#emojis)✅
     -   [Password Created Modal](#emojis)✅
 -   [Forms]($emojis)⭕️
-    -   [Login Form](#emojis)✅ /auth/login
-    -   [Enter Password Form](#emojis)⭕️
-    -   [Create Password Form](#emojis)✅ /auth/create-password
+    -   [Login Enter Email Form](#emojis)✅ /login
+    -   [Login Enter Password Form](#emojis) ✅ /login
     -   [User Sign Up Form](#emojis)⭕️
     -   [Business Sign Up Form](#emojis)⭕️
     -   [Business Identity Form](#emojis)⭕️

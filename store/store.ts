@@ -2,6 +2,8 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import appReducer from './reducers/appReducer';
+import loginReducer from './reducers/loginReducer';
+import registerReducer from './reducers/registerReducer';
 
 const persistConfig = {
   key: "app",
@@ -10,6 +12,8 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   app: appReducer,
+  login: loginReducer,
+  register: registerReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
