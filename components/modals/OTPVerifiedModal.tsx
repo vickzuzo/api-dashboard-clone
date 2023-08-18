@@ -12,9 +12,10 @@ import { useRouter } from "next/router";
 interface IProps {
   isOpen: boolean;
   onClose: () => void;
+  onProceed: () => void;
 }
 
-export const OTPVerifiedModal = ({ isOpen, onClose }: IProps) => {
+export const OTPVerifiedModal = ({ isOpen, onClose, onProceed }: IProps) => {
   const router = useRouter();
   return (
     <Modal
@@ -23,14 +24,13 @@ export const OTPVerifiedModal = ({ isOpen, onClose }: IProps) => {
       onClose={onClose}
       showHeaderComponent={false}
       footer={
-        <Button onClick={() => router.push("/auth/create-password")}>PROCEED</Button>
+        <Button onClick={onProceed}>PROCEED</Button>
       }
     >
       <div className="flex flex-col items-center gap-3">
         <HeaderText text="OTP VERIFIED" />
         <p className="text-center text-sm">
-          The OTP entered is correct. We noticed you do not have a permanent
-          password yet, click “Proceed” below to create one
+          The OTP entered is correct, click “Proceed” below to continue
         </p>
       </div>
     </Modal>

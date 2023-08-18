@@ -4,16 +4,16 @@ import { SubHeaderText, CaptionText } from '../../texts';
 import * as Yup from "yup";
 import { Button, FormInput } from "..";
 import { VDirect, VEyeCloseIcon , VLockIcon } from '../../icons';
-import { loginEmailSchema } from '../../../schemas';
+import { passwordSchema } from '../../../schemas';
 
 interface IProps {
   onSubmit: ((values: { 
-    email: string; 
+    password: string;
   }) => void
   )
 }
 
-export const LoginForm = ({ onSubmit }: IProps) => {
+export const LoginWithPasswordForm = ({ onSubmit }: IProps) => {
   return (
     <div className="w-full rounded-lg p-5 bg-[rgba(255,255,255,0.25)]">
         <div className="w-full rounded-lg p-5 bg-white">
@@ -21,24 +21,28 @@ export const LoginForm = ({ onSubmit }: IProps) => {
           <CaptionText text="Welcome to our service. We're thrilled that you're interested in using our service" />
           <Formik
             initialValues={
-                { email: "" }
+                {
+                  password: ""
+                }
             }
-            validationSchema={loginEmailSchema}
+            validationSchema={passwordSchema}
             onSubmit={onSubmit}
           >
             {(props) => (
               <Form>
                 <FormInput
-                  LeftIcon={<VDirect />}
-                  type="email"
-                  name="email"
-                  placeholder="Enter Email Address"
+                  LeftIcon={<VLockIcon />}
+                  RightIcon={<VEyeCloseIcon />}
+                  type="password"
+                  name="password"
+                  placeholder="Enter Password"
                 />
+                <CaptionText text="Forgot your password? Reset it Here" />
                 <Button
                   disabled={!props.dirty || !props.isValid}
                   type="submit"
                 >
-                  {"VERIFY EMAIL ADDRESS"}
+                  {"SIGN IN"}
                 </Button>
               </Form>
             )}

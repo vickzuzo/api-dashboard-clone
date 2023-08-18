@@ -14,9 +14,9 @@ import { OTPModal, OTPVerifiedModal } from "../../components/modals";
 import { useRouter } from "next/router";
 import { useAppDispatch } from "../../utils/redux";
 import { onCloseAppLoader, onOpenAppLoader } from "../../store";
-import { LoginForm } from "../../components/forms";
+import { RegisterForm } from "../../components/forms";
 
-const Login = () => {
+const Register = () => {
   const dispatch = useAppDispatch();
   const otpHandler = useDisclosure();
   const otpSuccessHandler = useDisclosure();
@@ -47,7 +47,7 @@ const Login = () => {
             </div>
           </div>
           <div className="flex-auto w-[40%] m-4 bg-auth_background bg-no-repeat bg-[bottom_right_5rem] bg-contain h-full flex flex-col justify-center items-center">
-            <LoginForm 
+            <RegisterForm 
               email={email} 
               onSubmit={(values) => {
                     if (email) {
@@ -76,4 +76,4 @@ const Login = () => {
     </section>
   );
 };
-export default Login;
+export default Register;
