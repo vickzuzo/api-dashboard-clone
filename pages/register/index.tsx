@@ -71,7 +71,10 @@ const Register = () => {
       <OTPVerifiedModal
         isOpen={otpSuccessHandler.isOpen}
         onClose={otpSuccessHandler.onClose}
-        // successCallback={otpSuccessHandler.onOpen}
+        onProceed={()=>{
+          console.log("proceed to action");
+          
+        }}
       />
     </section>
   );
