@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import React from 'react'
+import AuthLayout from '../components/layouts/AuthLayout'
 
 const Home = () => {
   return (
@@ -10,11 +11,22 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        Landing Page
-      </div>
+      <section className="w-full flex items-center justify-center h-screen">
+        <div className="flex justify-between rounded-md items-center h-full">
+          <div className="flex-auto w-[40%] m-4 bg-auth_background bg-no-repeat bg-[bottom_right_5rem] bg-contain h-full flex flex-col justify-center items-center">
+            Landing Page
+          </div>
+        </div>
+      </section>
     </>
   )
 }
 
+Home.getLayout = function getLayout(page) {
+  return (
+    <AuthLayout>
+      {page}
+    </AuthLayout>
+  )
+}
 export default Home

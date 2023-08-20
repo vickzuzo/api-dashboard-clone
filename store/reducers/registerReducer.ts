@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IRegisterProps {
+  avatar: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
 }
@@ -13,6 +16,9 @@ interface IRegisterState {
 const registerInitState: IRegisterState = {
   showRegisterForm: true,
   data: {
+    avatar: '',
+    first_name: '',
+    last_name: '',
     email: '',
     password: ''
   }
@@ -27,8 +33,27 @@ export const registerSlice = createSlice({
         showRegisterForm: true, 
       };
     },
+    onUpdateRegisterForm: (state, action  ) => {
+      const { payload } = action;
+      return {...state,
+        data: {
+          avatar: payload.email || state.data.avatar,
+          first_name: payload.first_name || state.data.first_name,
+          last_name: payload.last_name || state.data.last_name,
+          email: payload.email || state.data.email,
+          password: payload.password || state.data.password
+        }
+      }
+
+    },
+    onCloseRegisterForm: (state) => {
+      return { ...state, 
+        showRegisterForm: false, 
+      };
+    },
+
   },
 });
 
-export const { onOpenRegisterForm } = registerSlice.actions;
+export const { onOpenRegisterForm, onCloseRegisterForm, onUpdateRegisterForm } = registerSlice.actions;
 export default registerSlice.reducer;
