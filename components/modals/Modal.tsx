@@ -79,31 +79,31 @@ export const Modal = ({
       size={size}
     >
       <Fade in={isOpen}>
-        <div className="flex flex-col gap-4">
-          {showHeaderComponent ? (
-            <div
-              className={`flex justify-between mb-4 sticky top-0 bg-white border-b-[0.5px] p-4 border-gray-100
-            `}
-            >
-              {headerComponent ? (
-                headerComponent
-              ) : (
-                <p className="text-lg font-semibold">{title}</p>
-              )}
-              {showHeaderComponent && showCloseIcon ? (
-                <i onClick={onClose} className="text-gray-600 cursor-pointer">
-                  <AiOutlineClose />
-                </i>
-              ) : null}
+          <div className="flex flex-col gap-4 m-0">
+            {showHeaderComponent ? (
+              <div
+                className={`flex justify-between mb-4 sticky top-0 bg-white border-b-[0.5px] p-4 border-gray-100
+              `}
+              >
+                {headerComponent ? (
+                  headerComponent
+                ) : (
+                  <p className="text-lg font-semibold">{title}</p>
+                )}
+                {showHeaderComponent && showCloseIcon ? (
+                  <i onClick={onClose} className="text-gray-600 cursor-pointer">
+                    <AiOutlineClose />
+                  </i>
+                ) : null}
+              </div>
+            ) : (
+              false
+            )}
+            <div className="p-5 rounded-lg">
+              {children}
+              {footer}
             </div>
-          ) : (
-            false
-          )}
-          <div className="p-5 border border-gray-400 border-dashed rounded-lg">
-            {children}
           </div>
-          {footer}
-        </div>
       </Fade>
     </ModalComponent>
   );

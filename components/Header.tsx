@@ -4,6 +4,7 @@ import { RxPerson } from 'react-icons/rx'
 import { GiHamburgerMenu } from 'react-icons/gi'
 
 import React from 'react'
+import { AppLogo } from './logo'
 
 
 const Header = ({ currentUser}) => {
@@ -19,12 +20,9 @@ const Header = ({ currentUser}) => {
                     <GiHamburgerMenu size={20} />
                 </div>
             </Link>
-            <Link href="/">
-              <div className='hover:bg-blue-500 bg-blue-800 text-white p-2 rounded-lg inline-block'>
-                  <BsStars size={20} />
-              </div>
+            <Link href="/dashboard">
+              <AppLogo/>
             </Link>
-            <h1 className="text-2xl font-bold">API MANAGEMENT APP</h1>
           </div>
           <div className='flex justify-center space-x-2  items-center'>
             Search component goes here

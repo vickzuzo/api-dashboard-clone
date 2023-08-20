@@ -28,8 +28,10 @@ const Login = () => {
   const router = useRouter();
   
   useEffect(() => {
-    console.log(data);
-  }, [data])
+    return () => {
+      dispatch(onOpenLoginForm());
+    }
+  }, [dispatch])
   
   return (
     <section className="w-full flex items-center justify-center h-screen">
@@ -55,7 +57,6 @@ const Login = () => {
                     setTimeout(() => {
                       dispatch(onOpenLoginForm());
                       dispatch(onCloseAppLoader());
-                      router.push("/dashboard");
                     }, 3000);
                 }} />
             )}
@@ -64,6 +65,7 @@ const Login = () => {
       </div>
       <OTPModal
         isOpen={otpHandler.isOpen}
+        email={data.email}
         onClose={() => {
           dispatch(onOpenLoginForm());
           otpHandler.onClose();
@@ -73,8 +75,14 @@ const Login = () => {
       <OTPVerifiedModal
         isOpen={otpSuccessHandler.isOpen}
         onClose={otpSuccessHandler.onClose}
-        onProceed={() => {
+        onSkip={() => {
           dispatch(onOpenLoginWithPasswordForm());
+          router.push("/dashboard");
+          otpSuccessHandler.onClose();
+        }}
+        onSetupKYC={() => {
+          dispatch(onOpenLoginWithPasswordForm());
+          router.push("/dashboard/account/kyc");
           otpSuccessHandler.onClose();
         }}
         // successCallback={otpSuccessHandler.onOpen}

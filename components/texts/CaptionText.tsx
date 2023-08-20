@@ -7,7 +7,7 @@ interface PropsData {
 export const CaptionText = (props: PropsData) => {
   return (
     <div>
-      <p className="text-sm text-gray-600 font-extralight">{props.text}</p>
+      <p className={"text-sm text-gray-600 font-extralight"}>{props.text}</p>
     </div>
   );
 };

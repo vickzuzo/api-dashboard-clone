@@ -23,17 +23,17 @@ const AuthHeader = ({ currentUser}) => {
             </Link>
           </div>
           <nav className="flex justify-center items-center m-5">
-            {pathname === "/login" && (
-              <Link href={'/'} className="font-medium">
+            {pathname !== "/register" && (
+              <Link href={'/register'} className="font-medium">
                 <div className='bg-gray-100 hover:bg-blue-200 rounded-lg cursor-pointer m-2 p-2 inline-block'>
                   <SubHeaderText text="CREATE AN ACCOUNT" />
                 </div>
               </Link>
             )}
-            {pathname === "/register" && (
-              <Link href={'/'} className="font-medium">
+            {pathname !== "/login" && (
+              <Link href={'/login'} className="font-medium">
                 <div className='bg-gray-100 hover:bg-blue-200 rounded-lg cursor-pointer m-2 p-2 inline-block'>
-                  <h1 className="text-xl cursor-pointer">LOGIN</h1>
+                  <SubHeaderText text="LOGIN" />
                 </div>
               </Link>
             )}

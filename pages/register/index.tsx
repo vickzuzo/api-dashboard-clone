@@ -1,7 +1,5 @@
-import { Form, Formik } from "formik";
-import * as Yup from "yup";
-import { Button, FormInput } from "../../components/forms";
-import { VDirect, VEyeCloseIcon } from "../../components/icons";
+import react, { useEffect, useState } from 'react';
+import { RegisterForm } from "../../components/forms";
 import { AppLogo } from "../../components/logo";
 import {
   CaptionText,
@@ -12,71 +10,101 @@ import {
 import useDisclosure from "../../utils/useDisclosure";
 import { OTPModal, OTPVerifiedModal } from "../../components/modals";
 import { useRouter } from "next/router";
-import { useAppDispatch } from "../../utils/redux";
-import { onCloseAppLoader, onOpenAppLoader } from "../../store";
-import { RegisterForm } from "../../components/forms";
+import { useAppDispatch, useAppSelector } from "../../utils/redux";
+import { onCloseAppLoader, onOpenAppLoader, onOpenLoginForm, onOpenLoginWithPasswordForm, onUpdateForm, onUpdateRegisterForm } from "../../store";
+import { LoginForm } from "../../components/forms";
+import AuthLayout from "../../components/layouts/AuthLayout";
+import { LoginWithPasswordForm } from '../../components/forms/LoginWithPasswordForm';
+import img from "../../public/assets/profile.png";
+import Avatar from 'react-avatar-edit';
+import { AvatarInput } from '../../components/forms/AvatarInput';
 
 const Register = () => {
+  const { showLoginForm, showLoginWithPasswordForm, data } = useAppSelector((state) => state.login);
   const dispatch = useAppDispatch();
   const otpHandler = useDisclosure();
   const otpSuccessHandler = useDisclosure();
+  const [imageCrop, setImageCrop] = useState(false)
 
   const router = useRouter();
-  const { query } = router;
+  const [image, setImage] = useState(img);
+  const [preview, setPreview] = useState(null);
 
-  // Access the URL parameters from the query object
-  const email = query.email;
+  const handleOnClose = () => {
+    setPreview(null)
+  }
+  const handleOnCrop = (view) => {
+    setPreview(view)
+  }
+
+  const handleOnBeforeFileLoad = (elem) => {
+    if(elem.target.files[0].size > 71680){
+      alert("File is too big!");
+      elem.target.value = "";
+    };
+  }
+  
+  const onSetImageCrop = (value) => {
+    setImageCrop(false)
+  }
+  
+  useEffect(() => {
+    console.log(data);
+  }, [data])
+
+  const handleAvatarChange = (event) => {
+    const file = event.target.files[0];
+    if (file && file.type.substring(0, 5) === "image") {
+      console.log(file);
+      setImage(file);
+      dispatch(onUpdateRegisterForm({ avatar: file }))
+    }
+  };
+
+  const handleCropImageSave = (event) => {
+
+  }
+    
+  
   return (
     <section className="w-full flex items-center justify-center h-screen">
-      <div className="w-[80%] h-screen">
+      <div className="w-[40%] h-[95%]">
         <div className="flex justify-between rounded-md items-center h-full">
-          <div className="flex-auto w-[60%] m-4">
-            <div className="w-[40%]">
-              <AppLogo />
-            </div>
-
-            <div className="pt-8">
-              <HeaderText text="Create An Account" />
-            </div>
-            <div className="py-4">
-              <Text text="Welcome to our service. We’re thrilled that you’re interested in using our service. By signing up for an account, you’ll be able to access a wealth of business-related resources that can help you achieve your daily business goals with minimal effort. So why wait? Setup your account using the form on this page" />
-            </div>
-            <div className="w-full h-[30vh] bg-auth_banner bg-no-repeat bg-cover rounded-2xl overflow-hidden" />
-            <div className="w-full text-center p-4">
-              <CaptionText text="(C) 2023. All Rights Reserved." />
-            </div>
-          </div>
           <div className="flex-auto w-[40%] m-4 bg-auth_background bg-no-repeat bg-[bottom_right_5rem] bg-contain h-full flex flex-col justify-center items-center">
             <RegisterForm 
-              email={email} 
               onSubmit={(values) => {
-                    if (email) {
-                      router.push("/dashboard");
-                    } else {
-                      dispatch(onOpenAppLoader());
-                      setTimeout(() => {
-                        dispatch(onCloseAppLoader());
-                        otpHandler.onOpen();
-                      }, 3000);
-                    }
+                console.log(values);
+                
               }} />
           </div>
         </div>
       </div>
-      <OTPModal
+      {/* <OTPModal
         isOpen={otpHandler.isOpen}
-        onClose={otpHandler.onClose}
+        onClose={() => {
+          dispatch(onOpenLoginForm());
+          otpHandler.onClose();
+        }}
         successCallback={otpSuccessHandler.onOpen}
       />
       <OTPVerifiedModal
         isOpen={otpSuccessHandler.isOpen}
         onClose={otpSuccessHandler.onClose}
-        onProceed={()=>{
-          console.log("proceed to action");
-          
+        onProceed={() => {
+          dispatch(onOpenLoginWithPasswordForm());
+          otpSuccessHandler.onClose();
         }}
-      />
+        // successCallback={otpSuccessHandler.onOpen}
+      /> */}
     </section>
   );
 };
+
+Register.getLayout = function getLayout(page) {
+  return (
+    <AuthLayout>
+      {page}
+    </AuthLayout>
+  )
+}
 export default Register;

@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { Button, FormInput } from "..";
 import { VDirect, VEyeCloseIcon , VLockIcon } from '../../icons';
 import { loginEmailSchema } from '../../../schemas';
+import Link from 'next/link';
 
 interface IProps {
   onSubmit: ((values: { 
@@ -40,6 +41,19 @@ export const LoginForm = ({ onSubmit }: IProps) => {
                 >
                   {"VERIFY EMAIL ADDRESS"}
                 </Button>
+                <div className='w-full bg-gray-200 rounded'>
+                  <div className='flex flex-col justify-items-center items-center m-10'>
+                    <div className='m-2'>
+                      <CaptionText text="Having problems logging in?"/>
+                    </div>
+                    <Link href={'/login'} className='text-sm text-blue-500 hover:underline m-2'>
+                      Chat with us
+                    </Link>
+                  </div>
+                </div>
+                <div className='flex flex-row justify-center my-5'>
+                          <CaptionText text="(C) 2023. All Rights Reserved."/>
+                </div>
               </Form>
             )}
           </Formik>
