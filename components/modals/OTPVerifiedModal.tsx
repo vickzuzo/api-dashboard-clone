@@ -1,15 +1,8 @@
-import React, { useState } from "react";
-import { Modal } from "./Modal";
-import {
-  Button,
-  DangerPaleButton,
-  PaleButton,
-} from "../forms";
-import OtpInput from "react-otp-input";
-import { CaptionText, HeaderText } from "../texts";
 import { useRouter } from "next/router";
+import { Button, DangerPaleButton } from "../forms";
 import { VActivatedIcon } from "../icons";
-import Link from "next/link";
+import { CaptionText, HeaderText } from "../texts";
+import { Modal } from "./Modal";
 
 interface IProps {
   isOpen: boolean;
@@ -18,7 +11,12 @@ interface IProps {
   onSkip: () => void;
 }
 
-export const OTPVerifiedModal = ({ isOpen, onClose, onSetupKYC, onSkip }: IProps) => {
+export const OTPVerifiedModal = ({
+  isOpen,
+  onClose,
+  onSetupKYC,
+  onSkip,
+}: IProps) => {
   const router = useRouter();
   return (
     <Modal
@@ -31,19 +29,24 @@ export const OTPVerifiedModal = ({ isOpen, onClose, onSetupKYC, onSkip }: IProps
         <VActivatedIcon />
         <HeaderText text="Account Activated" />
         <p className="text-center text-sm">
-          Your account has been successfully activated. You can proceed to complete your KYC to have full functionality to your account. 
+          Your account has been successfully activated. You can proceed to
+          complete your KYC to have full functionality to your account.
         </p>
-        <Button onClick={onSetupKYC}>SETUP KYC</Button>
-        <PaleButton onClick={onSkip}>Skip for now</PaleButton>
+        <div className="my-2 w-full flex flex-col gap-3">
+          <Button rounded onClick={onSetupKYC}>
+            SETUP KYC
+          </Button>
+          <DangerPaleButton rounded onClick={onSkip}>
+            Skip for now
+          </DangerPaleButton>
+        </div>
 
-        <div className='w-full bg-gray-200 rounded'>
-          <div className='flex flex-col justify-items-center items-center m-10'>
-            <div className='m-2'>
-              <CaptionText text="Having problems logging in?"/>
-            </div>
-            <Link href={'/login'} className='text-sm text-blue-500 hover:underline m-2'>
+        <div className="w-full bg-blue_fade rounded py-8 my-8">
+          <div className="flex flex-col justify-items-center items-center">
+            <CaptionText text="Having problems logging in?" />
+            <p className="text-sm text-blue-500 cursor-pointer mt-3 font-bold">
               Chat with us
-            </Link>
+            </p>
           </div>
         </div>
       </div>

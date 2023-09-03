@@ -1,12 +1,11 @@
-import Header from "../Header";
+import AppHeader from "../AppHeader";
 import Sidebar from "../Sidebar";
-import React from "react";
 import { AppLoader } from "../loaders/AppLoading";
 
 export default function Layout({ children }) {
   return (
     <>
-      <Header currentUser={null} />
+      <AppHeader currentUser={null} />
       <Sidebar>
         <main>{children}</main>
       </Sidebar>

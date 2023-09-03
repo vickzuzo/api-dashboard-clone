@@ -17,9 +17,13 @@ interface IProps {
   required?: boolean;
   className?: string;
   disabled?: boolean;
+  options?: {
+    value: string;
+    label: string;
+  }[];
 }
 
-export const FormInput = ({
+export const FormSelect = ({
   containerProps,
   label,
   required,
@@ -29,7 +33,7 @@ export const FormInput = ({
   RightIcon,
   LeftIcon,
   labelClassName,
-  subtitle,
+  options,
   ...rest
 }: IProps) => {
   const [field, meta] = useField(rest);
@@ -42,23 +46,26 @@ export const FormInput = ({
     <div className={`my-4 ${className}`} {...containerProps}>
       {label && (
         <label
-          className={twMerge("mb-1 text-sm text-[#707070]", labelClassName)}
+          className={twMerge("mb-2 text-sm text-[#707070]", labelClassName)}
         >
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </label>
       )}
-      {subtitle && (
+      {rest?.subtitle && (
         <label className={twMerge("mb-4 text-sm text-gray-400 block")}>
-          {subtitle}
+          {rest?.subtitle}
         </label>
       )}
       <div className="w-full bg-blue_fade p-2 rounded-md flex items-center gap-3 py-4">
         {LeftIcon ? (
           <div className="border-r border-r-gray-300 px-2">{LeftIcon}</div>
         ) : null}
-        <input
-          className="outline-none bg-blue_fade border-none focus:ring-0 w-full"
+        <select
+          className={twMerge(
+            "outline-none bg-blue_fade border-none focus:ring-0 w-full",
+            field.value ? "text-black" : "text-gray-400"
+          )}
           style={{
             fontSize,
           }}
@@ -66,7 +73,14 @@ export const FormInput = ({
           disabled={disabled}
           {...field}
           {...rest}
-        />
+        >
+          <option value="">{placeholder}</option>
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
         {RightIcon ? <div className="px-2">{RightIcon}</div> : null}
       </div>
       {meta.touched && meta.error ? (
