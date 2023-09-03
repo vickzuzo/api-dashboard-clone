@@ -1,7 +1,10 @@
 import { forwardRef } from "react";
+import { twMerge } from "tailwind-merge";
 
 interface ButtonOptions {
   isLoading?: boolean;
+  forceHover?: boolean;
+  rounded?: boolean;
 }
 export type ButtonProps = React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -10,21 +13,25 @@ export type ButtonProps = React.DetailedHTMLProps<
   ButtonOptions;
 
 export const Button = (props: ButtonProps) => {
-  const { type = "button", children, ...rest } = props;
+  const {
+    type = "button",
+    children,
+    className,
+    disabled,
+    rounded,
+    ...rest
+  } = props;
   return (
     <button
-      className={`bg-blue-500 hover:bg-blue-700 w-full py-3 flex items-center justify-center rounded ${
-        props.disabled
-          ? "bg-blue_fade hover:bg-blue_fade cursor-not-allowed"
-          : ""
-      } ${props.className}`}
+      className={twMerge(
+        "bg-blue-500 hover:bg-blue-700 w-full py-3 flex items-center justify-center",
+        disabled && "bg-blue_fade hover:bg-blue_fade cursor-not-allowed",
+        rounded && "rounded",
+        className
+      )}
       {...rest}
     >
-      <p
-        className={`text-sm text-white ${
-          props.disabled ? "!text-gray-300" : ""
-        }`}
-      >
+      <p className={`text-sm text-white ${disabled ? "!text-gray-300" : ""}`}>
         {children}
       </p>
     </button>
@@ -32,14 +39,22 @@ export const Button = (props: ButtonProps) => {
 };
 
 export const PaleButton = (props: ButtonProps) => {
-  const { type = "button", children, ...rest } = props;
+  const {
+    type = "button",
+    children,
+    disabled,
+    rounded,
+    className,
+    ...rest
+  } = props;
   return (
     <button
-      className={`bg-white shadow hover:bg-blue-400 group w-full py-3 flex items-center justify-center rounded ${
-        props.disabled
-          ? "bg-blue_fade hover:bg-blue_fade cursor-not-allowed"
-          : ""
-      } ${props.className}`}
+      className={twMerge(
+        "bg-white shadow hover:bg-blue-400 group w-full py-3 flex items-center justify-center ",
+        disabled && "bg-blue_fade hover:bg-blue_fade cursor-not-allowed",
+        rounded && "rounded",
+        className
+      )}
       {...rest}
     >
       <p
@@ -76,12 +91,22 @@ export const DangerButton = (props: ButtonProps) => {
 };
 
 export const DangerPaleButton = (props: ButtonProps) => {
-  const { type = "button", children, ...rest } = props;
+  const {
+    type = "button",
+    children,
+    disabled,
+    rounded,
+    className,
+    ...rest
+  } = props;
   return (
     <button
-      className={`bg-white shadow hover:bg-red-700 group w-full py-3 flex items-center justify-center rounded ${
-        props.disabled ? "bg-red-200 hover:bg-red-200 cursor-not-allowed" : ""
-      } ${props.className}`}
+      className={twMerge(
+        "bg-white shadow hover:bg-red-500 group w-full py-3 flex items-center justify-center transition duration-300",
+        disabled && "bg-red-200 hover:bg-red-200 cursor-not-allowed",
+        rounded && "rounded",
+        className
+      )}
       {...rest}
     >
       <p

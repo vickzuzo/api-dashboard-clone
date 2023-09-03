@@ -5,7 +5,7 @@ type PropsData = {
   
 export const SubHeaderText = (props: PropsData) => {
   return (
-    <h4 className="text-3xl text-blue-600 font-bold">{props.text}</h4>
+    <h4 className="text-xl text-gray-800 font-bold">{props.text}</h4>
   )
 }
 

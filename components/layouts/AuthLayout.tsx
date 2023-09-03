@@ -1,14 +1,14 @@
-import AppHeader from "../AppHeader";
+import Header from "../Header";
 import Sidebar from "../Sidebar";
+import React from "react";
 import { AppLoader } from "../loaders/AppLoading";
+import AuthHeader from "../AuthHeader";
 
-export default function Layout({ children }) {
+export default function AuthLayout({ children }) {
   return (
     <>
-      <AppHeader currentUser={null} />
-      <Sidebar>
-        <main>{children}</main>
-      </Sidebar>
+      <AuthHeader currentUser={null} />
+      <main>{children}</main>
     </>
   );
 }

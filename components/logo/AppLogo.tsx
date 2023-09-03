@@ -10,8 +10,8 @@ export const AppLogo = (props: PropsData) => {
   return (
     <Image
       src={require("../../public/assets/logo_gray.png")}
-      alt="API-MAMGEMENT LOGO"
-      className="w-full"
+      alt="API MANAGEMENT LOGO"
+      className="w-[15rem]"
     />
   );
 };

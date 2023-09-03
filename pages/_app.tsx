@@ -1,13 +1,11 @@
-import "../styles/globals.css";
-import type { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";
 import type { AppProps } from "next/app";
-import React from "react";
-import { AppLoader } from "../components/loaders/AppLoading";
-import { AppLayout } from "../components/layouts";
+import type { ReactElement, ReactNode } from "react";
 import { Provider } from "react-redux";
-import { persistor, store } from "../store";
 import { PersistGate } from "redux-persist/integration/react";
+import { AppLayout } from "../components/layouts";
+import { persistor, store } from "../store";
+import "../styles/globals.css";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;

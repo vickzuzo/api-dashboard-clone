@@ -1,7 +1,10 @@
+"use client";
+
 import { animated, useSpring } from "@react-spring/web";
 import * as React from "react";
 import useBreakpointValue from "../../utils/useBreakpointValue";
 import { AiOutlineClose } from "react-icons/ai";
+import { createPortal } from "react-dom";
 
 interface FadeProps {
   children: React.ReactElement;
@@ -79,11 +82,11 @@ export const Modal = ({
       size={size}
     >
       <Fade in={isOpen}>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 m-0">
           {showHeaderComponent ? (
             <div
               className={`flex justify-between mb-4 sticky top-0 bg-white border-b-[0.5px] p-4 border-gray-100
-            `}
+              `}
             >
               {headerComponent ? (
                 headerComponent
@@ -96,13 +99,11 @@ export const Modal = ({
                 </i>
               ) : null}
             </div>
-          ) : (
-            false
-          )}
-          <div className="p-5 border border-gray-400 border-dashed rounded-lg">
-            {children}
+          ) : null}
+          <div className="rounded-lg">
+            <div className="p-5">{children}</div>
+            {footer}
           </div>
-          {footer}
         </div>
       </Fade>
     </ModalComponent>
@@ -137,15 +138,18 @@ const ModalComponent = ({
   const width = `w-[${size === "sm" ? sm : size === "lg" ? lg : "70%"}]`;
   return (
     <>
-      {isOpen ? (
-        <div className="fixed w-screen h-screen z-[999] bg-overlay-black flex items-center justify-center">
-          <main
-            className={`bg-white p-5 rounded-lg max-h-[80vh] shadow-lg w-[30%] ${width}`}
-          >
-            {children}
-          </main>
-        </div>
-      ) : null}
+      {isOpen
+        ? createPortal(
+            <div className="fixed top-0 w-screen h-screen z-[999] bg-overlay-black flex items-center justify-center">
+              <main
+                className={`bg-white rounded-lg max-h-[80vh] shadow-lg w-[30%] ${width} overflow-hidden`}
+              >
+                {children}
+              </main>
+            </div>,
+            document.body
+          )
+        : null}
     </>
   );
 };
