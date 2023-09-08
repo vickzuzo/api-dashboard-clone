@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 import { AppLogo } from "./logo";
 import { SubHeaderText } from "./texts";
 import { twMerge } from "tailwind-merge";
+import Navbar from "./Navbar";
 
 const AuthHeader = ({ currentUser }) => {
   const { pathname } = useRouter();
@@ -40,26 +41,10 @@ const AuthHeader = ({ currentUser }) => {
       <div
         className={twMerge(
           "flex justify-between h-24 w-full max-w-7xl mx-auto trasition ease-in-out duration-500",
-          animateHeader && "h-20"
+          animateHeader && "h-10"
         )}
       >
-        <div className="flex justify-center items-center cursor-pointer m-5">
-          <Link href="/">
-            <AppLogo />
-          </Link>
-        </div>
-        <nav className="flex justify-center items-center m-5">
-          {pathname === "/auth/login" && (
-            <Link href={"/auth/register"} className="font-medium">
-              Create an Account
-            </Link>
-          )}
-          {pathname === "/auth/register" && (
-            <Link href={"/auth/login"} className="font-medium">
-              Login
-            </Link>
-          )}
-        </nav>
+        <Navbar />
       </div>
     </header>
   );

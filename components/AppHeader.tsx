@@ -45,23 +45,23 @@ const AppHeader = ({ currentUser }) => {
         )}
       >
         <div className="flex justify-center items-center cursor-pointer">
-          <div className="cursor-pointer m-2 p-1 rounded-lg">
-            <GiHamburgerMenu size={20} />
-          </div>
           <Link href="/dashboard">
             <AppLogo />
           </Link>
+          <div className="cursor-pointer m-2 p-1 rounded-lg">
+            <GiHamburgerMenu size={20} />
+          </div>
         </div>
         <div className="cursor-pointer m-2 p-1 rounded-lg inline-block lg:hidden">
           <GiHamburgerMenu size={20} />
         </div>
         <div className="hidden lg:flex items-center justify-between w-full">
           <nav className="flex justify-center items-center gap-7 w-[65%]">
-            {/* search bar */}
+            search bar
           </nav>
           <div className="flex items-center gap-4 w-[32%]">
-            {/* message and notification icon */}
-            {/* user logged in */}
+            message and notification icon
+            user logged in
           </div>
         </div>
       </div>

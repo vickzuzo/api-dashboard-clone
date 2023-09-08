@@ -64,7 +64,11 @@ const Login = () => {
                   dispatch(onUpdateForm(values));
                   dispatch(onOpenAppLoader());
                   setTimeout(() => {
-                    dispatch(onOpenLoginForm());
+                    // dispatch(onOpenLoginForm());
+                    if(true){
+                      otpSuccessHandler.onOpen();
+                    }
+                    router.push("/dashboard");
                     dispatch(onCloseAppLoader());
                   }, 3000);
                 }}
