@@ -89,17 +89,11 @@ const Login = () => {
       <OTPVerifiedModal
         isOpen={otpSuccessHandler.isOpen}
         onClose={otpSuccessHandler.onClose}
-        onSkip={() => {
+        successCallback={() => {
           dispatch(onOpenLoginWithPasswordForm());
           // router.push("/dashboard");
           otpSuccessHandler.onClose();
         }}
-        onSetupKYC={() => {
-          dispatch(onOpenLoginWithPasswordForm());
-          // router.push("/dashboard/account/kyc");
-          otpSuccessHandler.onClose();
-        }}
-        // successCallback={otpSuccessHandler.onOpen}
       />
     </section>
   );
