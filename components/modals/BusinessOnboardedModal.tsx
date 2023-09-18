@@ -38,7 +38,7 @@ const BusinessOnboardedModal = ({ isOpen, onClose }: IProps) => {
     >
       <div className="flex flex-col items-center gap-3 p-5">
         <VShieldCheckIcon />
-        <HeaderText color="blue" text="BUSINESS ONBOARDED" />
+        <HeaderText className="text-blue-300" text="BUSINESS ONBOARDED" />
         <p className="text-center text-sm">
           Your business has been successfully added. Our team will commence the
           verification process and reach out to you within 3 Business Days

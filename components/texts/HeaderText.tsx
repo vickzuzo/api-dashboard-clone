@@ -1,15 +1,15 @@
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
 type PropsData = {
   text: string;
-  color?: string;
   className?: string;
 };
 
 export const HeaderText = (props: PropsData) => {
-  const color = props.color || "gray";
+  const { className } = props;
   return (
-    <h4 className={`text-3xl text-${color}-600 font-extrabold ${props.className}`}>
+    <h4 className={twMerge("text-3xl text-gray-600 font-extrabold", className)}>
       {props.text}
     </h4>
   );

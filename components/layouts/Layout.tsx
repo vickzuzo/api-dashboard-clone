@@ -4,12 +4,10 @@ import { AppLoader } from "../loaders/AppLoading";
 
 export default function Layout({ children }) {
   return (
-    <>
+    <div className="bg-gray-100">
       <AppHeader currentUser={null} />
-      <Sidebar>
-        <main>{children}</main>
-      </Sidebar>
-    </>
+      <Sidebar>{children}</Sidebar>
+    </div>
   );
 }
 

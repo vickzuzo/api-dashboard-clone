@@ -4,13 +4,13 @@ interface IAppState {
   showAppLoader: boolean;
 }
 
-const userInitState: IAppState = {
+const appInitState: IAppState = {
   showAppLoader: false,
 };
 
-export const userSlice = createSlice({
-  name: "user",
-  initialState: userInitState,
+export const appSlice = createSlice({
+  name: "app",
+  initialState: appInitState,
   reducers: {
     onOpenAppLoader: (state) => {
       return { ...state, showAppLoader: true };
@@ -21,5 +21,5 @@ export const userSlice = createSlice({
   },
 });
 
-export const { onOpenAppLoader, onCloseAppLoader } = userSlice.actions;
-export default userSlice.reducer;
+export const { onOpenAppLoader, onCloseAppLoader } = appSlice.actions;
+export default appSlice.reducer;
