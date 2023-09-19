@@ -24,16 +24,15 @@ export const Button = (props: ButtonProps) => {
   return (
     <button
       className={twMerge(
-        "bg-blue-500 hover:bg-blue-700 w-full py-3 flex items-center justify-center",
-        disabled && "bg-blue_fade hover:bg-blue_fade cursor-not-allowed",
+        "bg-blue-500 hover:bg-blue-700 w-full py-3 flex items-center justify-center text-sm text-white",
+        disabled &&
+          "bg-blue_fade hover:bg-blue_fade cursor-not-allowed !text-gray-300",
         rounded && "rounded",
         className
       )}
       {...rest}
     >
-      <p className={`text-sm text-white ${disabled ? "!text-gray-300" : ""}`}>
-        {children}
-      </p>
+      {children}
     </button>
   );
 };

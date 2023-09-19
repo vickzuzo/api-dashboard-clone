@@ -54,7 +54,7 @@ export const OTPModal = ({
     >
       <div className="flex flex-col items-center gap-3 p-5">
         <VShieldSecurityIcon />
-        <HeaderText color="blue" text="ENTER OTP" />
+        <HeaderText className="text-blue-300" text="ENTER OTP" />
         <p className="text-center text-sm">
           To verify your identity, we’ve sent an OTP to your Email Address
         </p>
