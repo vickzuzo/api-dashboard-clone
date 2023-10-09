@@ -132,3 +132,7 @@ dist
 
 .DS_STORE
 *.DS_STORE
+# *yarn.lock
+# yarn.lock
+# *package-lock.json
+# package-lock.json
