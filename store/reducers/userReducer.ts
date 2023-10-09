@@ -14,8 +14,8 @@ export const userSlice = createSlice({
   name: "user",
   initialState: userInitState,
   reducers: {
-    updateAppUser: (state, payload) => {
-      return { ...state, ...payload };
+    updateAppUser: (state, payload: { payload: IAppState; type: string }) => {
+      return { ...state, ...payload.payload };
     },
     logoutUser: (state) => {
       return userInitState;

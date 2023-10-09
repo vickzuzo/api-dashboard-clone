@@ -1,3 +1,5 @@
+import { onCloseAppLoader, onOpenAppLoader, updateAppUser } from "../../store";
+import { useAppDispatch } from "../../utils/redux";
 import AtmCard from "../cards/AtmCard";
 import { Button, PaleButton } from "../forms";
 import { VAtmCardIcon, VPlusIcon } from "../icons";
@@ -16,6 +18,20 @@ const ChangePaymentOptionModal = ({
   onRevertToDefault,
   onAddNewPaymentMethod,
 }: IProps) => {
+  const dispatch = useAppDispatch();
+  const updateUserSubscription = () => {
+    dispatch(onOpenAppLoader());
+    setTimeout(() => {
+      dispatch(
+        updateAppUser({
+          subscriptionStatus: "SUBSCRIBED",
+          accountEnabled: true,
+        })
+      );
+      dispatch(onCloseAppLoader());
+      onClose();
+    }, 4000);
+  };
   return (
     <Modal
       size="sm"
@@ -27,7 +43,10 @@ const ChangePaymentOptionModal = ({
           <PaleButton onClick={onClose} className="uppercase text-xs">
             CANCEL
           </PaleButton>
-          <Button onClick={onClose} className="uppercase text-xs">
+          <Button
+            onClick={updateUserSubscription}
+            className="uppercase text-xs"
+          >
             Continue with selection
           </Button>
         </div>

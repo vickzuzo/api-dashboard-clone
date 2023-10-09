@@ -21,7 +21,7 @@ const Dashboard = () => {
     dispatch(onOpenAppLoader());
     setTimeout(() => {
       dispatch(onCloseAppLoader());
-      dispatch(updateAppUser({ accountEnabled: true }));
+      dispatch(updateAppUser({ accountEnabled: true, subscriptionStatus: "UNSUBSCRIBED" }));
       accountVerifiedModalHandler.onOpen();
     }, 3000);
   };

@@ -43,21 +43,21 @@ const Sidebar = ({ children }) => {
     },
     {
       name: "Invoices",
-      href: "/invoices",
+      href: "/invoice-management",
       icon: <RxDashboard />,
       type: "link",
       canShow:
         user?.accountEnabled && user?.subscriptionStatus !== "UNSUBSCRIBED",
-      isActive: pathname === "/invoices",
+      isActive: pathname === "/invoice-management",
     },
     {
       name: "API Keys",
-      href: "/api-keys",
+      href: "/api-management",
       icon: <RxDashboard />,
       type: "link",
       canShow:
         user?.accountEnabled && user?.subscriptionStatus !== "UNSUBSCRIBED",
-      isActive: pathname === "/api-keys",
+      isActive: pathname === "/api-management",
     },
     {
       type: "group",
@@ -90,7 +90,7 @@ const Sidebar = ({ children }) => {
             <React.Fragment key={_idx}>
               {link.type === "link" ? (
                 <Link
-                  href="/"
+                  href={link.href}
                   className={twMerge(
                     "flex flex-row w-full my-2 items-center p-2",
                     !link?.canShow &&
