@@ -5,7 +5,7 @@ import {
   VCardVisaBlue,
   VCardVisaRed,
   VCardWireCard,
-} from "../../../components/icons";
+} from "./icons";
 
 interface IProps {
   channel?: "cheque" | "visa" | "wire" | "mastercard";

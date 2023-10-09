@@ -17,7 +17,7 @@ import StatusPill from "../../components/Pills/StatusPill";
 import { Tab, Tabs } from "../../components/tab";
 import Table, { TableData, TableHead, TableRow } from "../../components/table";
 import { Button } from "../../components/forms";
-import { PaymentChannel } from "./components/PaymentChannel";
+import { PaymentChannel } from "../../components/PaymentChannel";
 
 const PaymentHistoryPage = () => {
   return (
