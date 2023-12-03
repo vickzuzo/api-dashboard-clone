@@ -19,7 +19,6 @@ export type { CompanyDtoOutSuccessResponseDtoOut } from "./models/CompanyDtoOutS
 export type { CompanyUsersDtoIn } from "./models/CompanyUsersDtoIn";
 export type { EmailDtoIn } from "./models/EmailDtoIn";
 export type { ErrorResponseDtoOut } from "./models/ErrorResponseDtoOut";
-export type { GenApiKeyDtoIn } from "./models/GenApiKeyDtoIn";
 export type { InvoiceDateQueryDtoIn } from "./models/InvoiceDateQueryDtoIn";
 export type { KEInvoiceDtoIn } from "./models/KEInvoiceDtoIn";
 export type { KEInvoiceItemModel } from "./models/KEInvoiceItemModel";

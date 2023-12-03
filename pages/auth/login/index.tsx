@@ -26,8 +26,6 @@ const Login = () => {
   const otpHandler = useDisclosure();
   const otpSuccessHandler = useDisclosure();
 
-  const { sendOtp } = useSendOtp();
-
   const { isLoading, trigger } = useMutationRequest<
     LoginDtoIn,
     LoginDtoOutSuccessResponseDtoOut
@@ -58,7 +56,6 @@ const Login = () => {
                       email: values.email,
                       password: values.password,
                     });
-                    sendOtp(values.email);
                   }}
                 >
                   {(props) => (

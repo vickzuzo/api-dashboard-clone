@@ -2,8 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { GenApiKeyDtoIn } from "../models/GenApiKeyDtoIn";
-
 import type { CancelablePromise } from "../core/CancelablePromise";
 import { OpenAPI } from "../core/OpenAPI";
 import { request as __request } from "../core/request";
@@ -49,16 +47,10 @@ export class ApiKeyService {
    * @returns any Success
    * @throws ApiError
    */
-  public static postApiApiKey({
-    requestBody,
-  }: {
-    requestBody?: GenApiKeyDtoIn;
-  }): CancelablePromise<any> {
+  public static postApiApiKey(): CancelablePromise<any> {
     return __request(OpenAPI, {
       method: "POST",
       url: "/api/ApiKey",
-      body: requestBody,
-      mediaType: "application/json",
     });
   }
 }

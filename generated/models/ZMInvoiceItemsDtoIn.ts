@@ -17,11 +17,11 @@ export type ZMInvoiceItemsDtoIn = {
   readonly discountRate?: number;
   DiscountAmount: number;
   readonly taxableAmount?: number | null;
-  taxAmount?: number;
   Barcode?: string | null;
   Quantity: number;
   UnitPrice: number;
   TotalAmount: number;
+  readonly taxLabel?: string | null;
   TaxCodes: Array<string>;
   /**
    * Indicates whether the unit price includes tax (true) or not (false).

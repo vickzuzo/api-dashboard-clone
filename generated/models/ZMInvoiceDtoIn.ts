@@ -7,8 +7,6 @@ import type { ReceiptTypeCode } from "./ReceiptTypeCode";
 import type { ZMInvoiceItemsDtoIn } from "./ZMInvoiceItemsDtoIn";
 
 export type ZMInvoiceDtoIn = {
-  readonly tpin?: string | null;
-  readonly branchId?: string | null;
   /**
    * This represents an internal invoice number and must be unique for every invoice
    */
@@ -19,8 +17,8 @@ export type ZMInvoiceDtoIn = {
   OriginalInvoiceNumber?: string | null;
   RegistrantName: string;
   RegistrantId: string;
-  ModifierName?: string | null;
-  ModifierId?: string | null;
+  IssuerName?: string | null;
+  IssuerId?: string | null;
   CustomerMobileNumber?: string | null;
   ReportNumber?: string | null;
   readonly receivedItem?: string | null;
