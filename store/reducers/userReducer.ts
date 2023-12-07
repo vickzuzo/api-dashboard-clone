@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { LoginDtoOut } from "generated";
 
-interface IAppState {
+interface IAppState extends LoginDtoOut {
   accountEnabled: boolean;
   subscriptionStatus: string;
   accessToken: string;

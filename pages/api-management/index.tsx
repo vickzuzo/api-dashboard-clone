@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { AvatarGroup } from "../../components/avatar";
 import { SectionHeader } from "../../components/sectionHeader";
 import {
@@ -11,8 +11,30 @@ import {
 } from "../../components/icons";
 import { Breadcrumbs } from "../../components/breadcrumbs";
 import Layout from "../../components/layouts/Layout";
+import { useGetRequest } from "api/useGetRequest";
+import { useAppDispatch } from "utils/redux";
+import { onCloseAppLoader, onOpenAppLoader } from "store";
+import moment from "moment";
 
 const ApiManagementPage = () => {
+  const dispatch = useAppDispatch();
+
+  const { data, isLoading } = useGetRequest<undefined, { data: any }>({
+    service: "/api/ApiKey/1",
+    tag: "ApiKeyService",
+  });
+
+  // @ts-ignore
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(onOpenAppLoader());
+    } else {
+      dispatch(onCloseAppLoader());
+    }
+
+    return () => dispatch(onCloseAppLoader());
+  }, [isLoading]);
+
   return (
     <div>
       <div className="my-7">
@@ -36,7 +58,7 @@ const ApiManagementPage = () => {
           </p>
         </div>
         <div className="w-full flex gap-4 flex-wrap">
-          {["1881931131","18819311341", "18819311428", "18819314489"].map((item) => (
+          {data?.data?.map((item) => (
             <Link
               href={`/api-management/${item}`}
               key={item}
@@ -53,17 +75,21 @@ const ApiManagementPage = () => {
                 <div className="text-sm my-3 w-full">
                   <div className="w-full flex items-center gap-1">
                     <p className="w-[55%] text-sm">API ID:</p>
-                    <span className="font-semibold">923301295780</span>
+                    <span className="font-semibold">{item?.api_id}</span>
                   </div>
                   <div className="w-full flex items-center gap-1">
                     <p className="w-[55%] text-sm">REQUESTS MADE:</p>
-                    <span className="font-semibold">419</span>
+                    <span className="font-semibold">{item?.totalRequests}</span>
                   </div>
                   <div className="w-full flex items-center gap-1">
                     <p className="w-[55%] text-sm">REQUESTS COMPLETED:</p>
-                    <span className="font-semibold">273</span>
+                    <span className="font-semibold">
+                      {item?.requestsCompleted}
+                    </span>
                   </div>
-                  <p className="mt-3">22/2/2022 3:45:01 PM</p>
+                  <p className="mt-3">
+                    {moment().format("DD/MM/YYYY hh:mm A")}
+                  </p>
                 </div>
                 <div className="border-t border-b border-dashed border-gray-300 flex items-center justify-between py-2">
                   <p>App Status</p>
@@ -81,7 +107,9 @@ const ApiManagementPage = () => {
                   <div className="flex items-center gap-3">
                     <VEditIcon className="cursor-pointer" />
                     <div className="w-10 h-10 bg-gray-300 flex items-center justify-center rounded-full">
-                      <p className="text-xl font-bold">3</p>
+                      <p className="text-xl font-bold">
+                        {item?.totalAdministrators}
+                      </p>
                     </div>
                   </div>
                   <div className="cursor-pointer">

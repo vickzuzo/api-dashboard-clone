@@ -14,7 +14,7 @@ const Basic = () => {
   const handleSearchDrop = (event: ChangeEvent<HTMLInputElement>) =>
     handleSearch(event?.target?.value);
 
-  const selected = list.filter((item) => item.selected) ?? [];
+  const selected = list?.filter((item) => item?.selected) ?? [];
 
   return (
     <div className={"select relative"}>
@@ -29,7 +29,7 @@ const Basic = () => {
             list.find((item) => item.selected)?.title || "Select option"
           ) : selected.length > 0 ? (
             <div className="flex gap-2 flex-wrap">
-              {selected.map((item) => (
+              {selected?.map((item) => (
                 <div
                   key={item.value}
                   className="bg-blue-500 text-center overflow-hidden flex items-center gap-3 text-xs text-white justify-between rounded-lg"
@@ -64,8 +64,8 @@ const Basic = () => {
           </div>
           <ul className={"flex flex-col gap-1 p-2"}>
             {list
-              .filter((item) => item.searchMatched)
-              .map((item) => {
+              ?.filter((item) => item.searchMatched)
+              ?.map((item) => {
                 return <ListBox item={item} key={item.value} />;
               })}
           </ul>

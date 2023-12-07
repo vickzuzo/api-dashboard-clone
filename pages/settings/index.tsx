@@ -11,6 +11,8 @@ import { SubHeaderText } from "../../components/texts";
 import { FormCheckbox } from "../../components/forms/Checkbox";
 import { AvatarInput } from "../../components/forms/AvatarInput";
 import { FormSelect } from "../../components/forms/Select";
+import { useMutationRequest } from "api/useMutationRequest";
+import { useAppSelector } from "utils/redux";
 
 enum TABSEnum {
   PROFILE_SETTINGS = "PROFILE SETTINGS",
@@ -22,8 +24,43 @@ enum TABSEnum {
 const SettingsPage = () => {
   const [currentPage, setCurrentPage] = useState(TABSEnum.PROFILE_SETTINGS);
 
+  const user = useAppSelector((state) => state.user);
+
+  const { isLoading, trigger } = useMutationRequest<any, any>({
+    service: "",
+    method: "post",
+    tag: "",
+    onSuccess: (val, vars) => {},
+  });
+
+  const { isLoading: isLoadingPassword, trigger: passwordTrigger } =
+    useMutationRequest<any, any>({
+      service: "/api/Security/changepassword",
+      method: "post",
+      tag: "SecurityService",
+      onSuccess: (val, vars) => {},
+    });
+
   const onProfileUpdateSubmit = (values: any) => {
-    console.log(values);
+    trigger({
+      requestBody: {
+        email: values.email,
+        firstName: values.firstname,
+        lastName: values.lastname,
+        phoneNumber: values.phonenumber,
+        role: values.role,
+      },
+    });
+  };
+
+  const changePasswordSubmit = (values: any) => {
+    trigger({
+      requestBody: {
+        email: user?.email,
+        oldPassword: values.oldpassword,
+        newPassword: values.newpassword,
+      },
+    });
   };
 
   return (
@@ -52,11 +89,13 @@ const SettingsPage = () => {
               </div>
               <Formik
                 initialValues={{
-                  firstname: "",
-                  lastname: "",
-                  email: "",
-                  phonenumber: "",
-                  role: "",
+                  firstname: user?.firstName ? user?.firstName : "",
+                  lastname: user?.lastName ? user?.lastName : "",
+                  email: user?.email ? user?.email : "",
+                  // @ts-ignore
+                  phonenumber: user?.phoneNumber ? user?.phoneNumber : "",
+                  // @ts-ignore
+                  role: user?.role ? user?.role : "",
                 }}
                 validationSchema={Yup.object().shape({
                   firstname: Yup.string().required("This field is required!."),
@@ -156,7 +195,7 @@ const SettingsPage = () => {
                     "This field is required!."
                   ),
                 })}
-                onSubmit={onProfileUpdateSubmit}
+                onSubmit={changePasswordSubmit}
               >
                 {(props) => (
                   <Form>
@@ -175,7 +214,13 @@ const SettingsPage = () => {
                     <div className="w-full border-t border-t-gray-300 border-dashed" />
                     <div className="mt-4 flex gap-4">
                       <DangerButton className="rounded-md">CANCEL</DangerButton>
-                      <Button className="rounded-md">SAVE</Button>
+                      <Button
+                        className="rounded-md"
+                        isLoading={isLoadingPassword}
+                        type="submit"
+                      >
+                        SAVE
+                      </Button>
                     </div>
                   </Form>
                 )}

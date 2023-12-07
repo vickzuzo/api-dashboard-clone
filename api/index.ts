@@ -1,5 +1,6 @@
 import axios from "axios";
 import { logoutUser, store, updateAppUser } from "../store";
+import { access } from "fs";
 
 const APP_URLS = {
   production: {
@@ -19,6 +20,17 @@ export const REACT_APP_API_URL =
 export const httpClient = axios.create({
   baseURL: REACT_APP_API_URL,
 });
+
+httpClient.interceptors.request.use(
+  (config) => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 let isRefreshingToken = false;
 

@@ -18,6 +18,7 @@ import { useAppDispatch } from "../../utils/redux";
 import { useGetRequest } from "api/useGetRequest";
 import { SubscriptionDtoOutListSuccessResponseDtoOut } from "generated";
 import { EmptyState } from "components/emptyState";
+import moment from "moment";
 
 const SubscriptionPage = () => {
   const dispatch = useAppDispatch();
@@ -134,29 +135,37 @@ const SubscriptionPage = () => {
                 />
               )}
             </Tab>
-            <Tab label="Expired (4)">
-              <Table
-                tableHeader={
-                  <TableRow>
-                    <TableHead>SUBSCRIPTION ID</TableHead>
-                    <TableHead>USERS</TableHead>
-                    <TableHead>AMOUNT</TableHead>
-                    <TableHead>DATE</TableHead>
-                    <TableHead>STATUS</TableHead>
-                  </TableRow>
-                }
-                tableBody={[1, 2, 3, 4, 5].map((item, index) => (
-                  <TableRow key={index}>
-                    <TableData>099199313</TableData>
-                    <TableData>1-10</TableData>
-                    <TableData>1,350</TableData>
-                    <TableData>22/2/2022 3:45:01 PM</TableData>
-                    <TableData>
-                      <StatusPill status="expired" />
-                    </TableData>
-                  </TableRow>
-                ))}
-              />
+
+            <Tab label={`Expired (${subscriptions?.data?.length ?? 0})`}>
+              {subscriptions?.data?.length > 0 ? (
+                <Table
+                  tableHeader={
+                    <TableRow>
+                      <TableHead>SUBSCRIPTION ID</TableHead>
+                      <TableHead>USERS</TableHead>
+                      <TableHead>AMOUNT</TableHead>
+                      <TableHead>DATE</TableHead>
+                      <TableHead>STATUS</TableHead>
+                    </TableRow>
+                  }
+                  tableBody={subscriptions?.data?.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableData>{item?.id ?? "--/--"}</TableData>
+                      <TableData>{item?.totalUsers ?? "--/--"}</TableData>
+                      <TableData>{item?.price ?? "--/--"}</TableData>
+                      <TableData>{item?.createDate ?? "--/--"}</TableData>
+                      <TableData>
+                        <StatusPill status={item?.status} />
+                      </TableData>
+                    </TableRow>
+                  ))}
+                />
+              ) : (
+                <EmptyState
+                  title="No Active Subscriptions at the moment"
+                  info="We are unable to retrieve any active subscriptions at this time, Try refreshing or try again later."
+                />
+              )}
             </Tab>
           </Tabs>
         </div>
@@ -172,14 +181,14 @@ const SubscriptionPage = () => {
             </div>
             <div className="mt-8">
               <h1 className="font-bold text-3xl mb-4">
-                ₦ 1,398.99
+                ₦ 0.00
                 <span className="text-sm font-light text-gray-300 ml-2">
                   (TAX INCL.)
                 </span>
               </h1>
               <div className="bg-red-100 px-3 py-2 rounded-xl w-fit">
                 <p className="text-red-800 font-extrabold text-xs">
-                  Due on mar, 20th, 2023
+                  Due on {moment().format("DD MMMM YYYY")}
                 </p>
               </div>
             </div>

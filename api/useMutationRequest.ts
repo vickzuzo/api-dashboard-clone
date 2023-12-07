@@ -8,7 +8,7 @@ interface UseGetRequestOptions<A, B> {
   service: string;
   method: "post" | "put" | "patch" | "delete";
   payload?: A;
-  onSuccess?: (val: any, vars?: A) => void;
+  onSuccess?: (val: B, vars?: A) => void;
   onError?: (val: any) => void;
   tag: string;
   invalidate?: boolean;
@@ -34,8 +34,12 @@ export function useMutationRequest<A, B>({
 
   const info = useMutation({
     mutationKey: [tag],
-    mutationFn: (payload: A) =>
-      apiWrapper(() => httpClient[method]<A, B>(service, payload)),
+    mutationFn: async (payload: A) => {
+      const { data } = await apiWrapper(() =>
+        httpClient[method]<A, { data: B }>(service, payload)
+      );
+      return data;
+    },
     onSuccess: (data, vars) => {
       onSuccess?.(data, vars);
       if (invalidate) {

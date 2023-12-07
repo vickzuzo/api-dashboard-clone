@@ -14,7 +14,7 @@ const Select = ({
 
   useEffect(() => {
     setOptions(
-      data.map((item) => ({
+      data?.map((item) => ({
         ...item,
         selected: item?.selected || false,
         searchMatched: true,

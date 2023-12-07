@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import OtpInput from "react-otp-input";
 import { Button, DangerPaleButton, PaleButton } from "../forms";
 import { HeaderText } from "../texts";
-import { onCloseAppLoader, onOpenAppLoader } from "../../store";
+import { onCloseAppLoader, updateAppUser } from "../../store";
 import { useAppDispatch } from "../../utils/redux";
 import { Modal } from "./Modal";
 import { VShieldSecurityIcon } from "../icons";
@@ -26,13 +26,19 @@ export const OTPModal = ({
 
   const dispatch = useAppDispatch();
 
-  const { isLoading, trigger } = useMutationRequest<OTPDtoIn, LoginDtoOut>({
+  const { isLoading, trigger } = useMutationRequest<
+    OTPDtoIn,
+    { data: LoginDtoOut }
+  >({
     service: "/api/Otp",
     method: "post",
     tag: "OtpService",
     onSuccess: (val, vars) => {
       setOtp("");
       onClose();
+      dispatch(updateAppUser(val?.data));
+      localStorage.setItem("accessToken", val?.data?.tokenSet?.jwtToken);
+      localStorage.setItem("refreshToken", val?.data?.tokenSet?.refreshToken);
       successCallback?.();
     },
   });

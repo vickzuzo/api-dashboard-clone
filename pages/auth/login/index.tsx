@@ -22,9 +22,18 @@ import { useSendOtp } from "hooks/app/useSendOtp";
 const Login = () => {
   const [email, setEmail] = useState("");
 
+  const router = useRouter();
+
   const dispatch = useAppDispatch();
   const otpHandler = useDisclosure();
   const otpSuccessHandler = useDisclosure();
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      router.replace("/dashboard");
+    }
+  }, []);
 
   const { isLoading, trigger } = useMutationRequest<
     LoginDtoIn,
@@ -110,8 +119,8 @@ const Login = () => {
         isOpen={otpSuccessHandler.isOpen}
         onClose={otpSuccessHandler.onClose}
         successCallback={() => {
-          dispatch(onOpenLoginWithPasswordForm());
           otpSuccessHandler.onClose();
+          router.push("/dashboard");
         }}
       />
     </section>

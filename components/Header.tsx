@@ -45,7 +45,7 @@ const Header = ({ currentUser }) => {
           animateHeader && "h-20"
         )}
       >
-        <HomeNavbar currentUser={false} />
+        <HomeNavbar />
       </div>
     </header>
   );

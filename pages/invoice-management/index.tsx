@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../../components/layouts/Layout";
 import { Breadcrumbs } from "../../components/breadcrumbs";
 import { HomeIcon, VCalendarIcon } from "../../components/icons";
@@ -10,8 +10,34 @@ import StatusPill from "../../components/Pills/StatusPill";
 import { Tab, Tabs } from "../../components/tab";
 import Table, { TableData, TableHead, TableRow } from "../../components/table";
 import { Button } from "../../components/forms";
+import { useGetRequest } from "api/useGetRequest";
+import { useAppDispatch } from "utils/redux";
+import { onCloseAppLoader, onOpenAppLoader } from "store";
+import { MRAInvoiceDtoIn } from "generated";
+import moment from "moment";
 
 const InvoiceManagement = () => {
+  const dispatch = useAppDispatch();
+  const { data, isLoading } = useGetRequest<
+    undefined,
+    { data: MRAInvoiceDtoIn[] }
+  >({
+    service: "/ke/api/Invoice",
+    tag: "InvoiceService",
+  });
+
+  // @ts-ignore
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(onOpenAppLoader());
+    } else {
+      onCloseAppLoader();
+    }
+
+    return () => dispatch(onCloseAppLoader());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading]);
+
   return (
     <div>
       <div className="my-7">
@@ -143,134 +169,164 @@ const InvoiceManagement = () => {
           </p>
         </div>
         <Tabs>
-          <Tab label="All Invoices (10)">
-            <Table
-              tableHeader={
-                <TableRow>
-                  <TableHead>Invoice ID</TableHead>
-                  <TableHead>Total Items</TableHead>
-                  <TableHead>Amount</TableHead>
-                  <TableHead>Invoice Type</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Action</TableHead>
-                </TableRow>
-              }
-              tableBody={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index) => (
-                <TableRow key={index}>
-                  <TableData>029830192</TableData>
-                  <TableData>17</TableData>
-                  <TableData>₦951,764</TableData>
-                  <TableData>Invoice</TableData>
-                  <TableData>
-                    <StatusPill status="ACTIVE" />
-                  </TableData>
-                  <TableData>07/3/2023 9:45:01 PM</TableData>
-                  <TableData>
-                    <div className="flex items-center gap-3">
-                      <Button className="rounded-lg py-2">DOWNLOAD</Button>
-                    </div>
-                  </TableData>
-                </TableRow>
-              ))}
-            />
-            <EmptyState
-              title="There are no invoices yet."
-              info="When you perform a transaction on your account, they will appear here"
-            />
-            <Pagination
-              currentPage={1}
-              itemsPerPage={10}
-              onPageChange={(page) => console.log(page)}
-              totalItems={100}
-              totalPages={10}
-            />
+          <Tab label={`All Invoices (${data?.data?.length})`}>
+            {data?.data?.length < 0 ? (
+              <EmptyState
+                title="There are no invoices yet."
+                info="When you perform a transaction on your account, they will appear here"
+              />
+            ) : (
+              <>
+                <Table
+                  tableHeader={
+                    <TableRow>
+                      <TableHead>Invoice ID</TableHead>
+                      <TableHead>Total Items</TableHead>
+                      <TableHead>Amount</TableHead>
+                      <TableHead>Invoice Type</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Date</TableHead>
+                      <TableHead>Action</TableHead>
+                    </TableRow>
+                  }
+                  tableBody={data?.data?.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableData>{item?.invoiceIdentifier}</TableData>
+                      <TableData>{item?.invoiceItems?.length}</TableData>
+                      <TableData>₦{item?.totalAmtPaid}</TableData>
+                      <TableData>{item?.invoiceTypeDesc}</TableData>
+                      <TableData>
+                        <StatusPill status={item["status"] || "ACTIVE"} />
+                      </TableData>
+                      <TableData>
+                        {moment(item?.dateTimeInvoiceIssued).format(
+                          "dd, MM, YYYY hh:mm A"
+                        )}
+                      </TableData>
+                      <TableData>
+                        <div className="flex items-center gap-3">
+                          <Button className="rounded-lg py-2">DOWNLOAD</Button>
+                        </div>
+                      </TableData>
+                    </TableRow>
+                  ))}
+                />
+
+                <Pagination
+                  currentPage={1}
+                  itemsPerPage={10}
+                  onPageChange={(page) => console.log(page)}
+                  totalItems={100}
+                  totalPages={10}
+                />
+              </>
+            )}
           </Tab>
-          <Tab label="Pending Invoices (2)">
-            <Table
-              tableHeader={
-                <TableRow>
-                  <TableHead>Invoice ID</TableHead>
-                  <TableHead>Total Items</TableHead>
-                  <TableHead>Amount</TableHead>
-                  <TableHead>Invoice Type</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Action</TableHead>
-                </TableRow>
-              }
-              tableBody={[1, 2].map((item, index) => (
-                <TableRow key={index}>
-                  <TableData>029830192</TableData>
-                  <TableData>17</TableData>
-                  <TableData>₦951,764</TableData>
-                  <TableData>Invoice</TableData>
-                  <TableData>
-                    <StatusPill status="ACTIVE" />
-                  </TableData>
-                  <TableData>07/3/2023 9:45:01 PM</TableData>
-                  <TableData>
-                    <div className="flex items-center gap-3">
-                      <Button className="rounded-lg py-2">DOWNLOAD</Button>
-                    </div>
-                  </TableData>
-                </TableRow>
-              ))}
-            />
-            <EmptyState
-              title="There are no invoices yet."
-              info="When you perform a transaction on your account, they will appear here"
-            />
-            <Pagination
-              currentPage={1}
-              itemsPerPage={10}
-              onPageChange={(page) => console.log(page)}
-              totalItems={100}
-              totalPages={10}
-            />
+          <Tab label={`Pending Invoices (${data?.data?.length})`}>
+            {data?.data?.length < 0 ? (
+              <EmptyState
+                title="There are no invoices yet."
+                info="When you perform a transaction on your account, they will appear here"
+              />
+            ) : (
+              <>
+                <Table
+                  tableHeader={
+                    <TableRow>
+                      <TableHead>Invoice ID</TableHead>
+                      <TableHead>Total Items</TableHead>
+                      <TableHead>Amount</TableHead>
+                      <TableHead>Invoice Type</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Date</TableHead>
+                      <TableHead>Action</TableHead>
+                    </TableRow>
+                  }
+                  tableBody={data?.data?.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableData>{item?.invoiceIdentifier}</TableData>
+                      <TableData>{item?.invoiceItems?.length}</TableData>
+                      <TableData>₦{item?.totalAmtPaid}</TableData>
+                      <TableData>{item?.invoiceTypeDesc}</TableData>
+                      <TableData>
+                        <StatusPill status={item["status"] || "ACTIVE"} />
+                      </TableData>
+                      <TableData>
+                        {moment(item?.dateTimeInvoiceIssued).format(
+                          "dd, MM, YYYY hh:mm A"
+                        )}
+                      </TableData>
+                      <TableData>
+                        <div className="flex items-center gap-3">
+                          <Button className="rounded-lg py-2">DOWNLOAD</Button>
+                        </div>
+                      </TableData>
+                    </TableRow>
+                  ))}
+                />
+
+                <Pagination
+                  currentPage={1}
+                  itemsPerPage={10}
+                  onPageChange={(page) => console.log(page)}
+                  totalItems={100}
+                  totalPages={10}
+                />
+              </>
+            )}
           </Tab>
-          <Tab label="Due Invoices (4)">
-            <Table
-              tableHeader={
-                <TableRow>
-                  <TableHead>Invoice ID</TableHead>
-                  <TableHead>Total Items</TableHead>
-                  <TableHead>Amount</TableHead>
-                  <TableHead>Invoice Type</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Action</TableHead>
-                </TableRow>
-              }
-              tableBody={[1, 2, 3, 4].map((item, index) => (
-                <TableRow key={index}>
-                  <TableData>029830192</TableData>
-                  <TableData>17</TableData>
-                  <TableData>₦951,764</TableData>
-                  <TableData>Invoice</TableData>
-                  <TableData>
-                    <StatusPill status="ACTIVE" />
-                  </TableData>
-                  <TableData>07/3/2023 9:45:01 PM</TableData>
-                  <TableData>
-                    <div className="flex items-center gap-3">
-                      <Button className="rounded-lg py-2">DOWNLOAD</Button>
-                    </div>
-                  </TableData>
-                </TableRow>
-              ))}
-            />
-            <EmptyState
-              title="There are no invoices yet."
-              info="When you perform a transaction on your account, they will appear here"
-            />
-            <Pagination
-              currentPage={1}
-              itemsPerPage={10}
-              onPageChange={(page) => console.log(page)}
-              totalItems={100}
-              totalPages={10}
-            />
+          <Tab label={`Due Invoices (${data?.data?.length})`}>
+            {data?.data?.length < 0 ? (
+              <EmptyState
+                title="There are no invoices yet."
+                info="When you perform a transaction on your account, they will appear here"
+              />
+            ) : (
+              <>
+                <Table
+                  tableHeader={
+                    <TableRow>
+                      <TableHead>Invoice ID</TableHead>
+                      <TableHead>Total Items</TableHead>
+                      <TableHead>Amount</TableHead>
+                      <TableHead>Invoice Type</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Date</TableHead>
+                      <TableHead>Action</TableHead>
+                    </TableRow>
+                  }
+                  tableBody={data?.data?.map((item, index) => (
+                    <TableRow key={index}>
+                      <TableData>{item?.invoiceIdentifier}</TableData>
+                      <TableData>{item?.invoiceItems?.length}</TableData>
+                      <TableData>₦{item?.totalAmtPaid}</TableData>
+                      <TableData>{item?.invoiceTypeDesc}</TableData>
+                      <TableData>
+                        <StatusPill status={item["status"] || "ACTIVE"} />
+                      </TableData>
+                      <TableData>
+                        {moment(item?.dateTimeInvoiceIssued).format(
+                          "dd, MM, YYYY hh:mm A"
+                        )}
+                      </TableData>
+                      <TableData>
+                        <div className="flex items-center gap-3">
+                          <Button className="rounded-lg py-2">DOWNLOAD</Button>
+                        </div>
+                      </TableData>
+                    </TableRow>
+                  ))}
+                />
+
+                <Pagination
+                  currentPage={1}
+                  itemsPerPage={10}
+                  onPageChange={(page) => console.log(page)}
+                  totalItems={100}
+                  totalPages={10}
+                />
+              </>
+            )}
           </Tab>
         </Tabs>
       </div>

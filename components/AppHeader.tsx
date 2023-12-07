@@ -15,8 +15,15 @@ import useDisclosure from "../utils/useDisclosure";
 import { SideModal } from "./modals/SideModal";
 import { useGetRequest } from "api/useGetRequest";
 import { Spinner } from "./loaders";
+import { useAppDispatch, useAppSelector } from "utils/redux";
+import { current } from "@reduxjs/toolkit";
+import ActionDropDown from "./actionDropdown";
+import { logoutUser } from "store";
 
-const AppHeader = ({ currentUser }) => {
+const AppHeader = () => {
+  const dispatch = useAppDispatch();
+  const actionDropdownHandler = useDisclosure();
+  const currentUser = useAppSelector((state) => state.user);
   const notificationDeleteHandler = useDisclosure();
   const notificationPreviewHandler = useDisclosure();
   const { pathname } = useRouter();
@@ -44,6 +51,13 @@ const AppHeader = ({ currentUser }) => {
     tag: "NotificationService",
     enabled: notificationPreviewHandler.isOpen,
   });
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    localStorage.clear();
+  };
+
+  const actions = [{ action: "LOGOUT", onClick: handleLogout }];
 
   const activeClassName =
     "font-medium text-blue-500 rounded-lg underline underline-offset-4";
@@ -90,12 +104,22 @@ const AppHeader = ({ currentUser }) => {
                 onClick={() => notificationPreviewHandler.onOpen()}
               />
             </div>
-            <div className="flex items-center gap-3">
+            <div
+              className="flex items-center gap-3 relative cursor-pointer"
+              onClick={actionDropdownHandler.onOpen}
+            >
               <Avatar src={require("../public/assets/profile.png")} size={30} />
               <div>
-                <p className="text-sm font-bold">Ret Silo</p>
-                <p className="text-gray-400 text-xs">Admin</p>
+                <p className="text-sm font-bold">
+                  {currentUser?.firstName} {currentUser?.lastName}
+                </p>
+                <p className="text-gray-400 text-xs">{currentUser?.email}</p>
               </div>
+              <ActionDropDown
+                onClose={actionDropdownHandler.onClose}
+                actions={actions}
+                isOpen={actionDropdownHandler.isOpen}
+              />
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { RxDashboard } from "react-icons/rx";
 import { twMerge } from "tailwind-merge";
 import { useAppSelector } from "../utils/redux";
@@ -8,7 +8,14 @@ import { useAppSelector } from "../utils/redux";
 const Sidebar = ({ children }) => {
   const user = useAppSelector((state) => state?.user);
 
-  const { pathname } = useRouter();
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (!token) {
+      router.replace("/auth/login");
+    }
+  }, []);
 
   const links = [
     {
@@ -17,7 +24,7 @@ const Sidebar = ({ children }) => {
       icon: <RxDashboard />,
       type: "link",
       canShow: true,
-      isActive: pathname === "/dashboard",
+      isActive: router?.pathname === "/dashboard",
     },
     {
       type: "group",
@@ -30,7 +37,7 @@ const Sidebar = ({ children }) => {
       type: "link",
       canShow: true,
       // user?.accountEnabled && user?.subscriptionStatus !== "UNSUBSCRIBED",
-      isActive: pathname === "/user-management",
+      isActive: router?.pathname === "/user-management",
     },
     {
       name: "Payment History",
@@ -39,7 +46,7 @@ const Sidebar = ({ children }) => {
       type: "link",
       canShow:
         user?.accountEnabled && user?.subscriptionStatus !== "UNSUBSCRIBED",
-      isActive: pathname === "/payment-history",
+      isActive: router?.pathname === "/payment-history",
     },
     {
       name: "Invoices",
@@ -48,7 +55,7 @@ const Sidebar = ({ children }) => {
       type: "link",
       canShow: true,
       // user?.accountEnabled && user?.subscriptionStatus !== "UNSUBSCRIBED",
-      isActive: pathname === "/invoice-management",
+      isActive: router?.pathname === "/invoice-management",
     },
     {
       name: "API Keys",
@@ -57,7 +64,7 @@ const Sidebar = ({ children }) => {
       type: "link",
       canShow: true,
       // user?.accountEnabled && user?.subscriptionStatus !== "UNSUBSCRIBED",
-      isActive: pathname === "/api-management",
+      isActive: router?.pathname === "/api-management",
     },
     {
       type: "group",
@@ -70,7 +77,7 @@ const Sidebar = ({ children }) => {
       type: "link",
       canShow: true,
       // user?.accountEnabled,
-      isActive: pathname === "/subscription",
+      isActive: router?.pathname === "/subscription",
     },
     {
       name: "Settings",
@@ -79,7 +86,7 @@ const Sidebar = ({ children }) => {
       type: "link",
       canShow: true,
       // user?.accountEnabled && user?.subscriptionStatus !== "UNSUBSCRIBED",
-      isActive: pathname === "/settings",
+      isActive: router?.pathname === "/settings",
     },
   ];
 

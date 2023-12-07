@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../../components/layouts/Layout";
 import { Breadcrumbs } from "../../components/breadcrumbs";
 import {
@@ -18,8 +18,27 @@ import { Tab, Tabs } from "../../components/tab";
 import Table, { TableData, TableHead, TableRow } from "../../components/table";
 import { Button } from "../../components/forms";
 import { PaymentChannel } from "../../components/PaymentChannel";
+import { useGetRequest } from "api/useGetRequest";
+import { useAppDispatch } from "utils/redux";
+import { onCloseAppLoader, onOpenAppLoader } from "store";
 
 const PaymentHistoryPage = () => {
+  const dispatch = useAppDispatch();
+  const { data, isLoading } = useGetRequest({
+    service: "/api/Payments",
+    tag: "PaymentService",
+  });
+
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(onOpenAppLoader());
+    } else {
+      dispatch(onCloseAppLoader());
+    }
+
+    // return () => dispatch(onCloseAppLoader());
+  }, [isLoading]);
+
   return (
     <div>
       <div className="my-7">
