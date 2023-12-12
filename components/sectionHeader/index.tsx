@@ -17,7 +17,7 @@ export const SectionHeader: React.FC<IProps> = ({
 }) => {
   return (
     <div className="w-full flex items-center">
-      <div className="w-1/2 flex items-center gap-4">
+      <div className="w-1/2 flex items-center gap-4 flex-wrap">
         <h1 className="text-4xl font-bold">{title}</h1>
         {btnText && (
           <button

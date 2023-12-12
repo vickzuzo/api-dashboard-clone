@@ -19,7 +19,7 @@ const Header = ({ currentUser }) => {
 
   useEffect(() => {
     const listener = () => {
-      if (window.scrollY > 100) {
+      if (window.scrollY > 200) {
         setAnimateHeader(true);
       } else setAnimateHeader(false);
     };
@@ -41,8 +41,8 @@ const Header = ({ currentUser }) => {
     >
       <div
         className={twMerge(
-          "flex justify-between h-28 w-full max-w-7xl mx-auto trasition ease-in-out duration-500",
-          animateHeader && "h-20"
+          "flex justify-between h-fit lg:h-28 w-full max-w-7xl mx-auto trasition ease-in-out duration-500",
+          animateHeader && "h-fit lg:h-20"
         )}
       >
         <HomeNavbar />

@@ -61,8 +61,8 @@ const SubscriptionPage = () => {
     <div>
       {/* breadcrumbs */}
       <HeaderText text="Manage Payment & Subscription" />
-      <div className="w-full rounded-2xl p-6 bg-white/50 flex justify-between gap-4 mt-6">
-        <div className="w-[70%] bg-white rounded-lg p-4">
+      <div className="w-full rounded-2xl p-6 bg-white/50 flex justify-between gap-4 mt-6 flex-wrap lg:flex-nowrap">
+        <div className="w-full lg:w-[70%] bg-white rounded-lg p-4">
           {/* left content */}
           <div className="mb-5">
             <h1 className="text-lg font-bold">Subscription List</h1>
@@ -182,7 +182,7 @@ const SubscriptionPage = () => {
             </Tab>
           </Tabs>
         </div>
-        <div className="w-[30%]">
+        <div className="w-full lg:w-[30%]">
           {/* right content */}
           <div className="bg-white rounded-lg p-4">
             <div className="flex items-center justify-between border-b border-dashed border-b-gray-300 pb-3 ">

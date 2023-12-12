@@ -13,7 +13,7 @@ const HomeNavbar = () => {
     "font-medium text-blue-500 rounded-lg underline underline-offset-4";
   return (
     <nav className="flex flex-col text-center content-center sm:flex-row sm:text-left sm:justify-between py-2 px-6 bg-white sm:items-baseline w-full">
-      <div className="mb-2 sm:mb-0 self-center flex justify-center items-center gap-7 w-[25%]">
+      <div className="mb-2 sm:mb-0 self-center flex justify-center items-center gap-7 w-full lg:w-[25%]">
         <div className="mr-2">
           <Link href="/">
             <AppLogo />
@@ -67,7 +67,7 @@ const HomeNavbar = () => {
           Contact us
         </Link>
       </div>
-      <div className="sm:mb-0 self-center flex justify-center items-center gap-7 w-[25%]">
+      <div className="sm:mb-0 self-center flex justify-center items-center gap-7 w-full lg:w-[25%]">
         <div className="h-10 w-full">
           <Link
             href="/contact"

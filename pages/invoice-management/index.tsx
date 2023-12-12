@@ -55,8 +55,8 @@ const InvoiceManagement = () => {
               access
             </p>
           </div>
-          <div className="w-full flex gap-4 justify-between">
-            <div className="w-[48%] rounded-md border border-gray-300 border-dashed py-6 px-5 flex items-center  justify-between gap-3">
+          <div className="w-full flex gap-4 justify-between flex-wrap">
+            <div className="w-full lg:w-[48%] rounded-md border border-gray-300 border-dashed py-6 px-5 flex items-center  justify-between gap-3">
               <div className="w-[60%] p-3">
                 <h3 className="text-sm font-semibold uppercase">
                   Total Income
@@ -107,8 +107,8 @@ const InvoiceManagement = () => {
                 </div>
               </div>
             </div>
-            <div className="w-[50%] rounded-md flex gap-4">
-              <div className="w-[50%] border border-gray-300 border-dashed p-2 flex items-center rounded-md flex-wrap">
+            <div className="w-full lg:w-[50%] rounded-md flex gap-4 flex-wrap">
+              <div className="w-full lg:w-[50%] border border-gray-300 border-dashed p-2 flex items-center rounded-md flex-wrap">
                 <div className="w-full px-2">
                   <h3 className="text-sm font-semibold uppercase">Pending</h3>
                   <div className="flex items-center gap-4 my-2">
@@ -127,7 +127,7 @@ const InvoiceManagement = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-[50%] border border-gray-300 border-dashed p-2 flex items-center rounded-md">
+              <div className="w-full lg:w-[50%] border border-gray-300 border-dashed p-2 flex items-center rounded-md">
                 <div className="w-full px-2">
                   <h3 className="text-sm font-semibold uppercase">Failed</h3>
                   <div className="flex items-center gap-4 my-2">

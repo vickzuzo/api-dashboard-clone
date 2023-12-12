@@ -86,7 +86,7 @@ const UserManagement = () => {
           </div>
         }
       />
-      <div className="my-5 bg-white rounded-lg p-6">
+      <div className="my-5 bg-white rounded-lg p-6 w-full">
         <div>
           <div className="mb-5">
             <h2 className="text-2xl font-bold">User Roles Available</h2>
@@ -96,8 +96,8 @@ const UserManagement = () => {
               Support), a user can have access to what they needs
             </p>
           </div>
-          <div className="w-full flex gap-4">
-            <div className="w-[25%] rounded-md border border-gray-300 border-dashed p-2 flex items-center">
+          <div className="w-full flex gap-4 flex-wrap">
+            <div className="w-full lg:w-[25%] rounded-md border border-gray-300 border-dashed p-2 flex items-center">
               <div className="w-[60%]">
                 <h3 className="text-lg font-semibold">Super Admin</h3>
                 <p className="text-sm">0 Users</p>
@@ -109,7 +109,7 @@ const UserManagement = () => {
                 <AvatarGroup number={3} images={imageSources.slice(0, 3)} />
               </div>
             </div>
-            <div className="w-[25%] rounded-md border border-gray-300 border-dashed p-2 flex items-center">
+            <div className="w-full lg:w-[25%] rounded-md border border-gray-300 border-dashed p-2 flex items-center">
               <div className="w-[60%]">
                 <h3 className="text-lg font-semibold">Customer Support</h3>
                 <p className="text-sm">0 Users</p>
@@ -121,7 +121,7 @@ const UserManagement = () => {
                 <AvatarGroup number={3} images={imageSources.slice(0, 9)} />
               </div>
             </div>
-            <div className="w-[25%] rounded-md border border-gray-300 border-dashed p-2 flex items-center">
+            <div className="w-full lg:w-[25%] rounded-md border border-gray-300 border-dashed p-2 flex items-center">
               <div className="w-[60%]">
                 <h3 className="text-lg font-semibold">Database Manager</h3>
                 <p className="text-sm">0 Users</p>
@@ -133,7 +133,7 @@ const UserManagement = () => {
                 <AvatarGroup number={3} images={imageSources.slice(0, 4)} />
               </div>
             </div>
-            <div className="w-[25%] rounded-md border border-gray-300 border-dashed p-2 flex items-center">
+            <div className="w-full lg:w-[25%] rounded-md border border-gray-300 border-dashed p-2 flex items-center">
               <div className="w-[60%]">
                 <h3 className="text-lg font-semibold">Moderation Office</h3>
                 <p className="text-sm">0 Users</p>

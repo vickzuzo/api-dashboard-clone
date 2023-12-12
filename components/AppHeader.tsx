@@ -21,6 +21,7 @@ import ActionDropDown from "./actionDropdown";
 import { logoutUser } from "store";
 
 const AppHeader = () => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const actionDropdownHandler = useDisclosure();
   const currentUser = useAppSelector((state) => state.user);
@@ -55,6 +56,7 @@ const AppHeader = () => {
   const handleLogout = () => {
     dispatch(logoutUser());
     localStorage.clear();
+    router.push("/");
   };
 
   const actions = [{ action: "LOGOUT", onClick: handleLogout }];
@@ -87,7 +89,7 @@ const AppHeader = () => {
         </div>
         <div className="hidden lg:flex items-center justify-between w-full">
           <nav className="flex justify-center items-center gap-7 w-[65%]">
-            <div>
+            <div className="w-full lg:w-[50%]">
               <input
                 placeholder="Search by User, transaction ID, invoice ID ...."
                 className="outline-none bg-blue_fade border-none focus:ring-0 w-full"

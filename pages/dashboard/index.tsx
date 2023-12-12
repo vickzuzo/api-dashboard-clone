@@ -43,12 +43,12 @@ const Dashboard = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between flex-wrap">
           <h1 className="text-3xl font-bold">
             {!user?.accountEnabled ? "Dashboard" : "Overview"}
           </h1>
           {!user?.accountEnabled && (
-            <div className="flex items-center rounded-md overflow-hidden gap-2 bg-white">
+            <div className="flex items-center rounded-md overflow-hidden gap-2 bg-white lg:mt-5">
               <p
                 className={twMerge(
                   "px-3 py-2 text-black rounded-md flex items-center justify-center text-xs cursor-pointer",
@@ -85,8 +85,8 @@ const Dashboard = () => {
                 this oversimplified overview interface to help you understand
                 how you are using the service.
               </p>
-              <div className="flex flex-row items-center gap-3 mt-4">
-                <div className="w-[33.3%] border border-dashed border-gray-400 h-[120px] flex flex-row p-4 rounded-lg">
+              <div className="flex flex-row items-center gap-3 mt-4 flex-wrap">
+                <div className="w-full lg:w-[33.3%] border border-dashed border-gray-400 h-[120px] flex flex-row p-4 rounded-lg">
                   <div className="w-[70%]">
                     <p className="font-bold text-sm">INVOICES PROCESSED</p>
                     <div className="flex gap-3 items-end">
@@ -104,7 +104,7 @@ const Dashboard = () => {
                     />
                   </div>
                 </div>
-                <div className="w-[33.3%] border border-dashed border-gray-400 h-[120px] flex flex-row p-4 rounded-lg">
+                <div className="w-full lg:w-[33.3%] border border-dashed border-gray-400 h-[120px] flex flex-row p-4 rounded-lg">
                   <div className="w-[70%]">
                     <p className="font-bold text-sm">TOTAL EXPENSES</p>
                     <div className="flex items-end">
@@ -122,7 +122,7 @@ const Dashboard = () => {
                     />
                   </div>
                 </div>
-                <div className="w-[33.3%] border border-dashed border-gray-400 h-[120px] flex flex-row p-4 rounded-lg">
+                <div className="w-full lg:w-[33.3%] border border-dashed border-gray-400 h-[120px] flex flex-row p-4 rounded-lg">
                   <div className="w-[70%]">
                     <p className="font-bold text-sm">API REQUESTS</p>
                     <div className="flex gap-3 items-end">
@@ -148,8 +148,8 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="flex items-start justify-between text-black mt-5">
-              <div className="w-[68%]">
+            <div className="flex items-start justify-between text-black mt-5 flex-wrap">
+              <div className="w-full lg:w-[68%]">
                 <div className="bg-white rounded-lg p-4">
                   <p className="text-sm font-bold uppercase">Accumulations</p>
                   <h1 className="font-bold text-xl">Earning Report</h1>
@@ -167,8 +167,8 @@ const Dashboard = () => {
                       {/* <p>Chart</p> */}
                     </div>
                   </div>
-                  <div className="border border-dashed border-gary-400 rounded-lg p-4 flex justify-between items-center">
-                    <div className="w-[50%] flex items-center text-black">
+                  <div className="border border-dashed border-gary-400 rounded-lg p-4 flex justify-between items-center w-full flex-wrap">
+                    <div className="w-full lg:w-[50%] flex items-center text-black">
                       <div className="w-[20%]">
                         <Image
                           src="/assets/money-up-2.png"
@@ -190,7 +190,7 @@ const Dashboard = () => {
                         <p className="font-bold text-xs">26th of every Month</p>
                       </div>
                     </div>
-                    <div className="w-[50%] flex items-center text-black">
+                    <div className="w-full lg:w-[50%] mt-10 lg:mt-0 flex items-center text-black">
                       <div className="w-[20%]">
                         <Image
                           src="/assets/money-up-2.png"
@@ -248,7 +248,7 @@ const Dashboard = () => {
                   />
                 </div>
               </div>
-              <div className="w-[30%] bg-white rounded-lg p-3">
+              <div className="w-full lg:w-[30%] bg-white rounded-lg p-3">
                 <div className="p-3 border border-dashed border-gray-400 rounded-lg">
                   <div>
                     <h1 className="font-bold text-xl mb-4">My Activites</h1>

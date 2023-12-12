@@ -112,20 +112,20 @@ const SettingsPage = () => {
               >
                 {(props) => (
                   <Form>
-                    <div className="flex gap-8">
+                    <div className="flex gap-8 flex-wrap lg:flex-nowrap justify-between">
                       <FormInput
                         name="firstname"
                         label="First Name"
                         placeholder="Enter First Name"
                         type="text"
-                        containerProps={{ className: "w-full" }}
+                        containerProps={{ className: "w-full lg:w-[47%]" }}
                       />
                       <FormInput
                         name="lastname"
                         label="Last Name"
                         placeholder="Enter Last Name"
                         type="text"
-                        containerProps={{ className: "w-full" }}
+                        containerProps={{ className: "w-full lg:w-[47%]" }}
                       />
                     </div>
                     <FormInput
@@ -267,15 +267,15 @@ const SettingsPage = () => {
               >
                 {(props) => (
                   <Form>
-                    <div className="flex gap-10">
-                      <div className="w-[40%] mt-3">
+                    <div className="flex gap-10 flex-wrap lg:flex-nowrap">
+                      <div className="w-full lg:w-[40%] mt-3">
                         <SubHeaderText text="Business Information" />
                         <p className="text-sm">
                           This includes information about your avatar and
                           business name
                         </p>
                       </div>
-                      <div className="w-[60%]">
+                      <div className="w-full lg:w-[60%]">
                         <AvatarInput />
                         <FormInput
                           name="businessName"
@@ -287,15 +287,15 @@ const SettingsPage = () => {
                     </div>
 
                     <div className="w-full border-t border-t-gray-300 border-dashed" />
-                    <div className="flex gap-10">
-                      <div className="w-[40%] mt-3">
+                    <div className="flex gap-10 flex-wrap lg:flex-nowrap">
+                      <div className="w-full lg:w-[40%] mt-3">
                         <SubHeaderText text="Business Information" />
                         <p className="text-sm">
                           This includes information about your business type and
                           business industry
                         </p>
                       </div>
-                      <div className="w-[60%]">
+                      <div className="w-full lg:w-[60%]">
                         <FormSelect
                           options={[]}
                           name="businessType"
@@ -311,14 +311,14 @@ const SettingsPage = () => {
                       </div>
                     </div>
                     <div className="w-full border-t border-t-gray-300 border-dashed" />
-                    <div className="flex gap-10">
-                      <div className="w-[40%] mt-3">
+                    <div className="flex gap-10 flex-wrap lg:flex-nowrap">
+                      <div className="w-full lg:w-[40%] mt-3">
                         <SubHeaderText text="Location" />
                         <p className="text-sm">
                           You can change your business location address
                         </p>
                       </div>
-                      <div className="w-[60%]">
+                      <div className="w-full lg:w-[60%]">
                         <FormSelect
                           options={[]}
                           name="country"
@@ -328,15 +328,15 @@ const SettingsPage = () => {
                       </div>
                     </div>
                     <div className="w-full border-t border-t-gray-300 border-dashed" />
-                    <div className="flex gap-10">
-                      <div className="w-[40%] mt-3">
+                    <div className="flex gap-10 flex-wrap lg:flex-nowrap">
+                      <div className="w-full lg:w-[40%] mt-3">
                         <SubHeaderText text="Dispute Email" />
                         <p className="text-sm">
                           This email will be used in case there are disputes and
                           issues with transactions on your account
                         </p>
                       </div>
-                      <div className="w-[60%]">
+                      <div className="w-full lg:w-[60%]">
                         <FormInput
                           name="disputeEmail"
                           label="Email Address"
@@ -345,15 +345,15 @@ const SettingsPage = () => {
                       </div>
                     </div>
                     <div className="w-full border-t border-t-gray-300 border-dashed" />
-                    <div className="flex gap-10">
-                      <div className="w-[40%] mt-3">
+                    <div className="flex gap-10 flex-wrap lg:flex-nowrap">
+                      <div className="w-full lg:w-[40%] mt-3">
                         <SubHeaderText text="Support Email" />
                         <p className="text-sm">
                           Email whenever there is a need for your team to help
                           your customers resolve an issue
                         </p>
                       </div>
-                      <div className="w-[60%]">
+                      <div className="w-full lg:w-[60%]">
                         <FormInput
                           name="supportEmail"
                           label="Email Address"
@@ -362,15 +362,15 @@ const SettingsPage = () => {
                       </div>
                     </div>
                     <div className="w-full border-t border-t-gray-300 border-dashed" />
-                    <div className="flex gap-10">
-                      <div className="w-[40%] mt-3">
+                    <div className="flex gap-10 flex-wrap lg:flex-nowrap">
+                      <div className="w-full lg:w-[40%] mt-3">
                         <SubHeaderText text="Default Email" />
                         <p className="text-sm">
                           This is your official email address and will be used
                           as the default if the above emails are not set.
                         </p>
                       </div>
-                      <div className="w-[60%]">
+                      <div className="w-full lg:w-[60%]">
                         <FormInput
                           name="defaultEmail"
                           label="Email Address"
@@ -418,12 +418,12 @@ const SettingsPage = () => {
               >
                 {(props) => (
                   <Form>
-                    <div className="flex gap-10">
-                      <div className="w-[40%] mt-3">
+                    <div className="flex gap-10 flex-wrap lg:flex-nowrap w-full">
+                      <div className="w-full lg:w-[40%] mt-3">
                         <SubHeaderText text="Default Currency" />
                         <p className="text-sm">This is your default currency</p>
                       </div>
-                      <div className="w-[60%]">
+                      <div className="w-full lg:w-[60%]">
                         <FormSelect
                           name="currency"
                           label="Select Currency"
@@ -432,14 +432,14 @@ const SettingsPage = () => {
                         />
                       </div>
                     </div>
-                    <div className="flex gap-10">
-                      <div className="w-[40%] mt-3">
+                    <div className="flex gap-10 flex-wrap lg:flex-nowrap">
+                      <div className="w-full lg:w-[40%] mt-3">
                         <SubHeaderText text="Transaction Invoices" />
                         <p className="text-sm">
                           Who receives transaction receipts automatically
                         </p>
                       </div>
-                      <div className="w-[60%]">
+                      <div className="w-full lg:w-[60%]">
                         <FormCheckbox
                           name="invoiceToMe"
                           label="Send To me"
@@ -454,15 +454,15 @@ const SettingsPage = () => {
                     </div>
 
                     <div className="w-full border-t border-t-gray-300 border-dashed" />
-                    <div className="flex gap-10">
-                      <div className="w-[40%] mt-3">
+                    <div className="flex gap-10 flex-wrap lg:flex-nowrap">
+                      <div className="w-full lg:w-[40%] mt-3">
                         <SubHeaderText text="API Schedule" />
                         <p className="text-sm">
                           Plan how often you want your total invoice to be made
                           to the government
                         </p>
                       </div>
-                      <div className="w-[60%]">
+                      <div className="w-full lg:w-[60%]">
                         <FormCheckbox
                           name="apiScheduleImmediately"
                           label="Immediately it reaches threshold"
@@ -477,12 +477,12 @@ const SettingsPage = () => {
                     </div>
 
                     <div className="w-full border-t border-t-gray-300 border-dashed" />
-                    <div className="flex gap-10">
-                      <div className="w-[40%] mt-3">
+                    <div className="flex gap-10 flex-wrap lg:flex-nowrap">
+                      <div className="w-full lg:w-[40%] mt-3">
                         <SubHeaderText text="Time Zone" />
                         <p className="text-sm">Set time zone</p>
                       </div>
-                      <div className="w-[60%]">
+                      <div className="w-full lg:w-[60%]">
                         <FormCheckbox
                           name="localTimezone"
                           label="Local Time"
