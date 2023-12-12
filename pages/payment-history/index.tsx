@@ -29,16 +29,6 @@ const PaymentHistoryPage = () => {
     tag: "PaymentService",
   });
 
-  useEffect(() => {
-    if (isLoading) {
-      dispatch(onOpenAppLoader());
-    } else {
-      dispatch(onCloseAppLoader());
-    }
-
-    // return () => dispatch(onCloseAppLoader());
-  }, [isLoading]);
-
   return (
     <div>
       <div className="my-7">

@@ -54,7 +54,7 @@ const SettingsPage = () => {
   };
 
   const changePasswordSubmit = (values: any) => {
-    trigger({
+    passwordTrigger({
       requestBody: {
         email: user?.email,
         oldPassword: values.oldpassword,

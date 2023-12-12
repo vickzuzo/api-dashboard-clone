@@ -44,8 +44,8 @@ const Sidebar = ({ children }) => {
       href: "/payment-history",
       icon: <RxDashboard />,
       type: "link",
-      canShow:
-        user?.accountEnabled && user?.subscriptionStatus !== "UNSUBSCRIBED",
+      canShow: true,
+      // user?.accountEnabled && user?.subscriptionStatus !== "UNSUBSCRIBED",
       isActive: router?.pathname === "/payment-history",
     },
     {

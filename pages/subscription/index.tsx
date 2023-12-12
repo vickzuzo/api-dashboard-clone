@@ -19,6 +19,7 @@ import { useGetRequest } from "api/useGetRequest";
 import { SubscriptionDtoOutListSuccessResponseDtoOut } from "generated";
 import { EmptyState } from "components/emptyState";
 import moment from "moment";
+import { Spinner } from "components/loaders";
 
 const SubscriptionPage = () => {
   const dispatch = useAppDispatch();
@@ -74,7 +75,11 @@ const SubscriptionPage = () => {
             <Tab
               label={`All Subscriptions (${subscriptions?.data?.length ?? 0})`}
             >
-              {subscriptions?.data?.length > 0 ? (
+              {isLoading ? (
+                <div>
+                  <Spinner />
+                </div>
+              ) : subscriptions?.data?.length > 0 ? (
                 <Table
                   tableHeader={
                     <TableRow>
@@ -105,7 +110,11 @@ const SubscriptionPage = () => {
               )}
             </Tab>
             <Tab label={`Active (${subscriptions?.data?.length ?? 0})`}>
-              {subscriptions?.data?.length > 0 ? (
+              {isLoading ? (
+                <div>
+                  <Spinner />
+                </div>
+              ) : subscriptions?.data?.length > 0 ? (
                 <Table
                   tableHeader={
                     <TableRow>
@@ -137,7 +146,11 @@ const SubscriptionPage = () => {
             </Tab>
 
             <Tab label={`Expired (${subscriptions?.data?.length ?? 0})`}>
-              {subscriptions?.data?.length > 0 ? (
+              {isLoading ? (
+                <div>
+                  <Spinner />
+                </div>
+              ) : subscriptions?.data?.length > 0 ? (
                 <Table
                   tableHeader={
                     <TableRow>

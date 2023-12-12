@@ -10,6 +10,7 @@ import { Form, Formik } from "formik";
 import { FormSelect } from "components/forms/Select";
 import Select from "components/forms/Select/ui/Select";
 import { useGetRoles } from "hooks/app/useGetRoles";
+import { AiOutlineClose } from "react-icons/ai";
 
 interface IProps {
   isOpen: boolean;
@@ -66,15 +67,23 @@ const AddNewUserModal: React.FC<IProps> = ({ isOpen, onClose }) => {
         >
           <Form>
             <div className="flex flex-col items-center gap-3 p-2">
-              <div className="flex items-center gap-4 w-full">
-                <div className="bg-gray-100 p-3 rounded-lg">
-                  <VAtmCardIcon />
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4 w-full">
+                  <div className="bg-gray-100 p-3 rounded-lg">
+                    <VAtmCardIcon />
+                  </div>
+                  <div>
+                    <h1 className="font-bold text-lg">Add New User</h1>
+                    <p className="text-xs">
+                      Switch to another option to receive payment easily
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h1 className="font-bold text-lg">Add New User</h1>
-                  <p className="text-xs">
-                    Switch to another option to receive payment easily
-                  </p>
+                <div className="w-7 h-7 rounded-sm bg-red-200 cursor-pointer flex items-center justify-center"
+                    onClick={onClose}>
+                  <AiOutlineClose
+                    className="text-red-400"
+                  />
                 </div>
               </div>
               <div className="w-full">

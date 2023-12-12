@@ -1,5 +1,12 @@
-import React from "react";
+import { useGetRequest } from "api/useGetRequest";
+import { useMutationRequest } from "api/useMutationRequest";
+import { Spinner } from "components/loaders";
+import AddNewUserModal from "components/modals/AddNewUserModal";
+import { ClientUserDtoIn } from "generated";
+import Link from "next/link";
+import { Avatar, AvatarGroup } from "../../components/avatar";
 import { Breadcrumbs } from "../../components/breadcrumbs";
+import { EmptyState } from "../../components/emptyState";
 import {
   EditIcon,
   EmailVerifiedIcon,
@@ -7,25 +14,16 @@ import {
   TrashIcon,
 } from "../../components/icons";
 import Layout from "../../components/layouts/Layout";
-import { SectionHeader } from "../../components/sectionHeader";
-import Link from "next/link";
-import { Avatar, AvatarGroup } from "../../components/avatar";
-import StatusPill from "../../components/Pills/StatusPill";
-import { Tabs, Tab } from "../../components/tab";
-import Table, { TableRow, TableHead, TableData } from "../../components/table";
-import Pagination from "../../components/pagination";
 import ActionSuccessfulModal from "../../components/modals/ActionSuccessfulModal";
-import { HeaderText } from "../../components/texts";
-import useDisclosure from "../../utils/useDisclosure";
-import { Button } from "../../components/forms";
 import ConfirmationModal from "../../components/modals/ConfirmationModal";
+import Pagination from "../../components/pagination";
+import { SectionHeader } from "../../components/sectionHeader";
+import { Tab, Tabs } from "../../components/tab";
+import Table, { TableData, TableHead, TableRow } from "../../components/table";
+import { HeaderText } from "../../components/texts";
+import { onCloseAppLoader } from "../../store";
 import { useAppDispatch } from "../../utils/redux";
-import { onCloseAppLoader, onOpenAppLoader } from "../../store";
-import { EmptyState } from "../../components/emptyState";
-import { useGetRequest } from "api/useGetRequest";
-import { ClientUserDtoIn } from "generated";
-import { useMutationRequest } from "api/useMutationRequest";
-import AddNewUserModal from "components/modals/AddNewUserModal";
+import useDisclosure from "../../utils/useDisclosure";
 
 const UserManagement = () => {
   const dispatch = useAppDispatch();
@@ -57,17 +55,6 @@ const UserManagement = () => {
       userDeletedModalHandler.onOpen();
     },
   });
-
-  React.useEffect(() => {
-    if (isDeleting || isLoading) {
-      dispatch(onOpenAppLoader());
-    } else {
-      dispatch(onCloseAppLoader());
-    }
-
-    () => dispatch(onCloseAppLoader());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDeleting, isLoading]);
 
   const handleDeleteUser = () => {
     triggerDelete(undefined);
@@ -169,7 +156,11 @@ const UserManagement = () => {
           </p>
         </div>
         <Tabs>
-          {data?.data?.length > 0 ? (
+          {isLoading ? (
+            <div>
+              <Spinner />
+            </div>
+          ) : data?.data?.length > 0 ? (
             <Tab label={`All Users (${data?.data?.length})`}>
               <Table
                 tableHeader={
@@ -232,7 +223,11 @@ const UserManagement = () => {
               info="Click “Add New User” to create new users"
             />
           )}
-          {data?.data?.length > 0 ? (
+          {isLoading ? (
+            <div>
+              <Spinner />
+            </div>
+          ) : data?.data?.length > 0 ? (
             <Tab label={`Verified (${data?.data?.length})`}>
               <Table
                 tableHeader={
@@ -295,7 +290,11 @@ const UserManagement = () => {
               info="Click “Add New User” to create new users"
             />
           )}
-          {data?.data?.length > 0 ? (
+          {isLoading ? (
+            <div>
+              <Spinner />
+            </div>
+          ) : data?.data?.length > 0 ? (
             <Tab label={`Unverified (${data?.data?.length})`}>
               <Table
                 tableHeader={

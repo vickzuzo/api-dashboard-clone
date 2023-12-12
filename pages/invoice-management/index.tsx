@@ -15,6 +15,7 @@ import { useAppDispatch } from "utils/redux";
 import { onCloseAppLoader, onOpenAppLoader } from "store";
 import { MRAInvoiceDtoIn } from "generated";
 import moment from "moment";
+import { Spinner } from "components/loaders";
 
 const InvoiceManagement = () => {
   const dispatch = useAppDispatch();
@@ -26,17 +27,6 @@ const InvoiceManagement = () => {
     tag: "InvoiceService",
   });
 
-  // @ts-ignore
-  useEffect(() => {
-    if (isLoading) {
-      dispatch(onOpenAppLoader());
-    } else {
-      onCloseAppLoader();
-    }
-
-    return () => dispatch(onCloseAppLoader());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading]);
 
   return (
     <div>
@@ -59,7 +49,7 @@ const InvoiceManagement = () => {
       <div className="my-5 bg-white rounded-lg p-6">
         <div>
           <div className="mb-5">
-            <h2 className="text-2xl font-bold">AT A GLANCE</h2>
+            <h2 className="text-xl font-bold">AT A GLANCE</h2>
             <p className="text-sm text-gray-400">
               An intuitive way to see all your general invoices for a quick
               access
@@ -72,7 +62,7 @@ const InvoiceManagement = () => {
                   Total Income
                 </h3>
                 <div className="flex items-center gap-4 my-2">
-                  <h1 className="text-2xl font-black">
+                  <h1 className="text-xl font-black">
                     ₦8,332,134.
                     <span className="text-gray-400 text-lg font-normal">
                       99
@@ -118,11 +108,11 @@ const InvoiceManagement = () => {
               </div>
             </div>
             <div className="w-[50%] rounded-md flex gap-4">
-              <div className="w-[50%] border border-gray-300 border-dashed p-2 flex items-center rounded-md">
+              <div className="w-[50%] border border-gray-300 border-dashed p-2 flex items-center rounded-md flex-wrap">
                 <div className="w-full px-2">
                   <h3 className="text-sm font-semibold uppercase">Pending</h3>
                   <div className="flex items-center gap-4 my-2">
-                    <h1 className="text-2xl font-black">
+                    <h1 className="text-xl font-black">
                       ₦8,332,134.
                       <span className="text-gray-400 text-lg font-normal">
                         99
@@ -141,7 +131,7 @@ const InvoiceManagement = () => {
                 <div className="w-full px-2">
                   <h3 className="text-sm font-semibold uppercase">Failed</h3>
                   <div className="flex items-center gap-4 my-2">
-                    <h1 className="text-2xl font-black">
+                    <h1 className="text-xl font-black">
                       ₦8,332,134.
                       <span className="text-gray-400 text-lg font-normal">
                         99
@@ -170,7 +160,11 @@ const InvoiceManagement = () => {
         </div>
         <Tabs>
           <Tab label={`All Invoices (${data?.data?.length})`}>
-            {data?.data?.length < 0 ? (
+            {isLoading ? (
+              <div>
+                <Spinner />
+              </div>
+            ) : data?.data?.length < 0 ? (
               <EmptyState
                 title="There are no invoices yet."
                 info="When you perform a transaction on your account, they will appear here"
@@ -223,7 +217,11 @@ const InvoiceManagement = () => {
             )}
           </Tab>
           <Tab label={`Pending Invoices (${data?.data?.length})`}>
-            {data?.data?.length < 0 ? (
+            {isLoading ? (
+              <div>
+                <Spinner />
+              </div>
+            ) : data?.data?.length < 0 ? (
               <EmptyState
                 title="There are no invoices yet."
                 info="When you perform a transaction on your account, they will appear here"
@@ -276,7 +274,11 @@ const InvoiceManagement = () => {
             )}
           </Tab>
           <Tab label={`Due Invoices (${data?.data?.length})`}>
-            {data?.data?.length < 0 ? (
+            {isLoading ? (
+              <div>
+                <Spinner />
+              </div>
+            ) : data?.data?.length < 0 ? (
               <EmptyState
                 title="There are no invoices yet."
                 info="When you perform a transaction on your account, they will appear here"
